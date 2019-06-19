@@ -59,6 +59,11 @@ Page({
     this.calc();
   },
 
+  bindViewTap() {
+    wx.navigateTo({
+      url: '../index/index'
+    })
+  },
 
   calc() {
     let len = this.data.checkedTags.length;
@@ -215,7 +220,7 @@ Page({
         char.tags.push(char.type + "干员");
         char.tags.push(char.sex + "性干员");
         let name =  char.name ;
-        char.tags.forEach(char.tags, function ( tag:any) {
+        char.tags.forEach( function ( tag:any) {
           if (tag in _that.data.tags_aval) {
             _that.data.tags_aval[tag].push({
               "name": name,
@@ -234,17 +239,17 @@ Page({
           }
           char_tag_sum++;
         });
-        all_chars[name] = {
+        _that.data.all_chars[name] = {
           'level': char.level,
           'tags': char.tags
         };
       });
-      avg_char_tag = char_tag_sum / tag_count;
+      _that.data.avg_char_tag = char_tag_sum / tag_count;
 
 
 
       console.log(data)
-      _that.data.checkedTags.push("医疗");
+      _that.data.checkedTags.push("治疗");
       _that.calc();
     });
 
