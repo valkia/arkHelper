@@ -1,0 +1,3 @@
+<!--tags/tags.wxml-->
+<text>{{tags}}</text>
+
