@@ -1,3 +1,13 @@
 <!--tags/tags.wxml-->
-<text bindtap="bindViewTap">{{tags}}</text>
+<text bindtap="bindViewTap">跳转</text>
+
+<view wx:for="{{tags}}" wx:for-item="tag">
+<text wx:for="{{tag.cntags}}" wx:for-item="t" bindtap="clickTag" data-title='{{t}}'>
+{{t}}
+</text>
+</view>
+
+
+
+<text style="color:green">{{checkedTags}}</text>
 

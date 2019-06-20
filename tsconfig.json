@@ -1,9 +1,9 @@
 {
   "compilerOptions": {
     "strictNullChecks": true,
-    "noImplicitAny": false,
+    "noImplicitAny": true,
     "module": "CommonJS",
-    "target": "ES6",
+    "target": "es5",
     "allowJs": false,
     "experimentalDecorators": true,
     "noImplicitThis": true,
@@ -23,7 +23,7 @@
     ],
     "lib": [
       "dom",
-      "es6"
+      "es2015"
     ],
   },
   "include": [
