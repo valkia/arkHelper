@@ -1,13 +1,38 @@
+<cu-custom bgColor="bg-gradual-blue" isBack="{{true}}">
+  <view slot="backText">返回</view>
+  <view slot="content">明日方舟助手</view>
+</cu-custom>
 <!--tags/tags.wxml-->
 <text bindtap="bindViewTap">跳转</text>
 
-<view wx:for="{{tags}}" wx:for-item="tag">
-<text wx:for="{{tag.cntags}}" wx:for-item="t" bindtap="clickTag" data-title='{{t}}'>
-{{t}}
-</text>
-</view>
 
 
 
 <text style="color:green">{{checkedTags}}</text>
 
+
+<view class="bg-white padding">
+  <view >
+    <view class="flex flex-wrap" wx:for="{{tags}}" wx:for-item="tag">
+      <view class="tag-title">{{tag.cn}}</view>
+      <view class="tag-wrap">
+      <view class="flex flex-wrap">
+      <view class="tag-text" wx:for="{{tag.cntags}}" wx:for-item="t" bindtap="clickTag" data-title='{{t}}'>
+        {{t}}
+      </view>
+      </view>
+      </view>
+    </view>
+  </view>
+</view>
+
+<view wx:for="{{possible}}" wx:for-item="item">
+  <text style="color:red">{{item.scope}}</text>
+  <view wx:for="{{item.tags}}" wx:for-item="t">
+    <text style="color:red">{{t}}</text>
+  </view>
+  <view wx:for="{{item.possible}}" wx:for-item="p">
+    <text style="color:red">{{p.name}}</text>
+  </view>
+
+</view>

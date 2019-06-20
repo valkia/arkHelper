@@ -44,40 +44,25 @@ Page({
     tags: [
       {
         "cn": "资质",
-        "cntags": ["新手", "资深干员", "高级资深干员"],
-        "en": "Qualification",
-        "entags": ["Newbie", "Senior", "Advanced Senior"]
+        "cntags": ["新手", "资深干员", "高级资深干员"]
       },
       {
         "cn": "位置",
-        "cntags": ["远程位", "近战位"],
-        "en": "Position",
-        "entags": ["Ranged", "Melee"]
+        "cntags": ["远程位", "近战位"]
       },
       {
         "cn": "性别",
-        "cntags": ["男性干员", "女性干员"],
-        "en": "Gender",
-        "entags": ["Male", "Female"]
+        "cntags": ["男性干员", "女性干员"]
       },
       {
         "cn": "种类",
-        "cntags": ["先锋干员", "狙击干员", "医疗干员", "术师干员", "近卫干员", "重装干员", "辅助干员", "特种干员"],
-        "en": "Class",
-        "entags": ["Vanguard", "Sniper", "Medic", "Caster", "Guard", "Defender", "Support",
-          "Specialist"
-        ]
+        "cntags": ["先锋干员", "狙击干员", "医疗干员", "术师干员", "近卫干员", "重装干员", "辅助干员", "特种干员"]
+        
       },
       {
         "cn": "词缀",
         "cntags": ["治疗", "支援", "输出", "群攻", "减速", "生存", "防护", "削弱", "位移", "控场", "爆发", "召唤",
-          "快速复活", "费用回复"
-        ],
-        "en": "Affix",
-        "entags": ["Healing", "Support", "DPS", "Splash", "Slow", "Survival", "Protection",
-          "Debuffer", "Displacement", "Crowd Control", "Burst", "Summoner",
-          "Quick Resurrection", "Cost Recovery"
-        ]
+          "快速复活", "费用回复"]
       }
     ],
     tags_aval: {} = {},
@@ -201,7 +186,7 @@ Page({
     combs.forEach(function (comb: any) {
       if (!comb.possible || comb.possible.length === 0) return false;
       let chars = comb.possible;
-      that.setData({ possible: chars});
+      
       let tags = comb.tags;
       let tagsTL = comb.tagsTL;
       let chars_html : any[];
@@ -257,11 +242,14 @@ Page({
       //   "</tr>");
 
     });
+    
+    
+
     // if (lang !== 'cn') $('[data-toggle="tooltip"]').tooltip();
     //https://ak.graueneko.xyz/akhr.json
 
 
-
+    that.setData!({ possible: combs });
 
   },
   init() {
@@ -329,7 +317,7 @@ Page({
       _that.calc();
     });
   },
-  clickTag(event) {
+  clickTag(event:any) {
     console.log(event);
     let _that = this;
     let tag = event.target.dataset.title;
@@ -349,7 +337,7 @@ Page({
       if (_that.data.checkedTags.length >= 6) {
 
         wx.showToast({
-          title: "无法选择更多标签：最多6个。"
+          title: "无法选择更多标签：最多6个。",
           icon: "none",
           duration: 2000
         })
@@ -359,7 +347,7 @@ Page({
       } else {
         //@ts-ignore
         _that.data.checkedTags.push(tag);
-        _that.setData({
+        _that.setData!({
           checkedTags: _that.data.checkedTags
         });
         

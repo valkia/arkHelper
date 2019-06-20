@@ -1,1 +1,21 @@
 /* tags/tags.wxss */
+.tag-title{
+  text-align: center;
+  padding: 10rpx;
+margin: 8rpx;
+flex-basis: 15%;
+
+}
+.tag-text{
+  text-align: center;
+  padding: 10rpx;
+margin: 8rpx;
+flex-basis: 30%;
+}
+.tag-wrap{
+flex-basis: 80%;
+}
+
+.padding{
+  padding: 15rpx 10rpx;
+}
