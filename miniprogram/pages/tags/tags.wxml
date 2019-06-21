@@ -1,38 +1,60 @@
-<cu-custom bgColor="bg-gradual-blue" isBack="{{true}}">
-  <view slot="backText">返回</view>
+<!--tags/tags.wxml-->
+<wxs module="filters" src="../../utils/filters.wxs"></wxs>
+<cu-custom bgColor="bg-gradual-blue" >
+<!-- isBack="{{true}}" -->
+  <!-- <view slot="backText">返回</view> -->
   <view slot="content">明日方舟助手</view>
 </cu-custom>
-<!--tags/tags.wxml-->
-<text bindtap="bindViewTap">跳转</text>
+
+<!-- <text bindtap="bindViewTap">跳转</text>
 
 
 
 
-<text style="color:green">{{checkedTags}}</text>
-
+<text style="color:green">{{checkedTags}}</text> -->
 
 <view class="bg-white padding">
-  <view >
-    <view class="flex flex-wrap" wx:for="{{tags}}" wx:for-item="tag">
-      <view class="tag-title">{{tag.cn}}</view>
-      <view class="tag-wrap">
-      <view class="flex flex-wrap">
-      <view class="tag-text" wx:for="{{tag.cntags}}" wx:for-item="t" bindtap="clickTag" data-title='{{t}}'>
-        {{t}}
-      </view>
-      </view>
+  <view class="flex flex-wrap">
+    <view class="tag-number" wx:for="{{['清空','6','5','4','3','2','1']}}" wx:for-item="item" bindtap="clickStars" data-title='{{item}}'>
+
+        {{item}}
+      
+    </view>
+  </view>
+  </view>
+
+  <view class="bg-white padding">
+    <view>
+      <view class="flex flex-wrap" wx:for="{{tags}}" wx:for-item="tag">
+        <view class="tag-title">{{tag.cn}}</view>
+        <view class="tag-wrap">
+          <view class="flex flex-wrap">
+            <view class="tag-text" wx:for="{{tag.cntags}}" wx:for-item="t" bindtap="clickTag" data-title='{{t}}'>
+              {{t}}
+            </view>
+          </view>
+        </view>
       </view>
     </view>
   </view>
-</view>
 
-<view wx:for="{{possible}}" wx:for-item="item">
-  <text style="color:red">{{item.scope}}</text>
-  <view wx:for="{{item.tags}}" wx:for-item="t">
-    <text style="color:red">{{t}}</text>
-  </view>
-  <view wx:for="{{item.possible}}" wx:for-item="p">
-    <text style="color:red">{{p.name}}</text>
-  </view>
+  <view class="bg-white padding">
+    <view>
+      <view class="flex flex-wrap" wx:for="{{possible}}" wx:for-item="item" wx:if="{{item.possible.length>0}}">
+        <!-- {{filters.toFix(item.score)}} -->
+        <view class="tag-title">
+          <view wx:for="{{item.tags}}" wx:for-item="t">
+            {{t}}
+          </view>
+        </view>
+        <view class="tag-wrap">
+          <view class="flex flex-wrap">
 
-</view>
+            <view wx:for="{{item.possible}}" class="tag-text" wx:for-item="p">
+              {{p.name}}
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>

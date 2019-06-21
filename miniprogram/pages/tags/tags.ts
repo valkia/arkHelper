@@ -1,5 +1,6 @@
 //tags.js
 var app = getApp()
+import jsonData = require('/data.js');
 
 class HeroBasic {
   name?: string;
@@ -57,7 +58,7 @@ Page({
       {
         "cn": "种类",
         "cntags": ["先锋干员", "狙击干员", "医疗干员", "术师干员", "近卫干员", "重装干员", "辅助干员", "特种干员"]
-        
+
       },
       {
         "cn": "词缀",
@@ -70,7 +71,8 @@ Page({
     avg_char_tag: 0,
     checkedTags: [] = [],
     checkedTagsTL: [] = [],
-    possible:[]=[]
+    possible: [] = [],
+    optStars: [] = []
 
   },
 
@@ -80,8 +82,23 @@ Page({
     //     return formatTime(new Date(log))
     //   })
     // })
+    console.log(jsonData.dataList);
     this.init();
 
+  },
+
+  clickStars(event: any) {
+    console.log(event);
+    let _that = this;
+    let value = event.target.dataset.title;
+    if (value === '清空') {
+      this.setData!({ optStars: [] });
+    } else {
+      this.data.optStars = this.data.optStars.filter(function (v, _, __) {
+        return v !== value;
+      });
+      this.setData!({ optStars: this.data.optStars });
+    }
   },
 
   bindViewTap() {
@@ -113,7 +130,7 @@ Page({
       });
     }
     // console.log(combs);
-    let optStars: string[] = ["all", "6", "5", "4", "3", "2", "1"];
+    let optStars: string[] = this.data.optStars;
     // $(".btn-opt").each(function (_, __) {
     //   if ($(this).attr("opt-id") === "all" || $(this).hasClass("btn-secondary")) return;
     //   optStars.push($(this).attr("opt-id"));
@@ -127,7 +144,7 @@ Page({
       //@ts-ignore 
       let chars: HeroBasic[] = [...that.data.tags_aval[tags[0]]];//切割每个字符
       for (let i = 1; i < tags.length; i++) {
-        let reduced_chars: HeroBasic[]=[];
+        let reduced_chars: HeroBasic[] = [];
 
         chars.forEach((char: HeroBasic) => {
           // console.log(tags_aval[tags[i]]);
@@ -186,21 +203,35 @@ Page({
     combs.forEach(function (comb: any) {
       if (!comb.possible || comb.possible.length === 0) return false;
       let chars = comb.possible;
-      
+
       let tags = comb.tags;
+      console.log(tags);
       let tagsTL = comb.tagsTL;
-      let chars_html : any[];
-      // let colors = {
-      //   1: "dark",
-      //   2: "light",
-      //   3: "success",
-      //   4: "info",
-      //   5: "warning",
-      //   6: "danger"
-      // };
+      let chars_html: any[];
+      let colors = {
+        1: "dark",
+        2: "light",
+        3: "success",
+        4: "info",
+        5: "warning",
+        6: "danger"
+      };
       comb.possible.sort(function (a: any, b: any) {
         return a.level > b.level ? -1 : (a.level < b.level ? 1 : 0);
       });
+      let result: { tag: any[], scope: number }[] = [];
+      chars.forEach(function (char: HeroBasic, index: number) {
+        let tagsTmp: any[] = [];
+        for (let i = 0; i < tags.length; i++) {
+
+          tagsTmp.push(tags[i]);
+
+        }
+        let scope = Math.floor(comb.score * 100) / 100;
+        result.push({ tag: tagsTmp, scope: scope });
+
+      })
+      console.log(result);
       // chars.forEach(function (_: any, char:any) {
       //   let padding = showName && imageSize < 60 ? "padding-right: 4px" :
       //     "padding-right: 1px";
@@ -242,8 +273,8 @@ Page({
       //   "</tr>");
 
     });
-    
-    
+
+
 
     // if (lang !== 'cn') $('[data-toggle="tooltip"]').tooltip();
     //https://ak.graueneko.xyz/akhr.json
@@ -254,83 +285,88 @@ Page({
   },
   init() {
     let _that = this;
-    app.func.get('/akhr.json', {}, function (data: Hero[]) {
 
-      let tag_count = 0;
-      let char_tag_sum = 0;
-      // console.log(data);
+    //app.func.get('/akhr.json', {}, function (data: Hero[]) {
+    let data: Hero[] = jsonData.dataList;
+    this.setData!({ optStars: "['清空','6','5','4','3','2','1']" });
+    let tag_count = 0;
+    let char_tag_sum = 0;
+    // console.log(data);
 
 
 
 
-      for (const key in data) {
-        if (data.hasOwnProperty(key)) {
-          const char = data[key];
-          if (char.hidden) continue;
-          char.tags!.push(char.type + "干员");
-          char.tags!.push(char.sex + "性干员");
-          let name = char.name;
-          char.tags!.forEach(function (tag: string) {
-            if (tag in _that.data.tags_aval) {
+    for (const key in data) {
+      if (data.hasOwnProperty(key)) {
+        const char = data[key];
+        if (char.hidden) continue;
+        char.tags!.push(char.type + "干员");
+        char.tags!.push(char.sex + "性干员");
+        let name = char.name;
+        char.tags!.forEach(function (tag: string) {
+          if (tag in _that.data.tags_aval) {
 
-              let tmp: { [key: string]: HeroBasic[] } = _that.data.tags_aval;
-              tmp[tag].push({
-                "name": name,
-                "img": char["name-en"],
-                "level": char.level,
-                "type": char.type
-              });
+            let tmp: { [key: string]: HeroBasic[] } = _that.data.tags_aval;
+            tmp[tag].push({
+              "name": name,
+              "img": char["name-en"],
+              "level": char.level,
+              "type": char.type
+            });
 
-              _that.setData!({ tags_aval: tmp })
+            _that.setData!({ tags_aval: tmp })
 
-            } else {
+          } else {
 
-              let tmp: { [key: string]: HeroBasic[] } = _that.data.tags_aval;
+            let tmp: { [key: string]: HeroBasic[] } = _that.data.tags_aval;
 
-              tmp[tag] = [{
-                "name": name,
-                "img": char["name-en"],
-                "level": char.level,
-                "type": char.type
-              }];
+            tmp[tag] = [{
+              "name": name,
+              "img": char["name-en"],
+              "level": char.level,
+              "type": char.type
+            }];
 
-              _that.setData!({ tags_aval: tmp })
-              tag_count++;
-            }
-            char_tag_sum++;
-          });
-          let tmp: { [key: string]: Hero } = _that.data.all_chars;
-          tmp.name = {
-            'level': char.level,
-            'tags': char.tags
-          };
-          _that.setData!({ all_chars: tmp })
-        }
+            _that.setData!({ tags_aval: tmp })
+            tag_count++;
+          }
+          char_tag_sum++;
+        });
+        let tmp: { [key: string]: Hero } = _that.data.all_chars;
+        tmp.name = {
+          'level': char.level,
+          'tags': char.tags
+        };
+        _that.setData!({ all_chars: tmp })
       }
+    }
 
 
 
 
-      _that.setData!({ avg_char_tag: (char_tag_sum / tag_count) });
+    _that.setData!({ avg_char_tag: (char_tag_sum / tag_count) });
 
-      _that.setData!({ checkedTags: ["治疗"] })
-      _that.calc();
-    });
+    _that.calc();
+    //});
   },
-  clickTag(event:any) {
+  clickTag(event: any) {
     console.log(event);
     let _that = this;
     let tag = event.target.dataset.title;
     let checked = false;
 
     //是否点过
-    if (tag in _that.data.checkedTags){
+    if ((_that.data.checkedTags).includes(tag)) {
       checked = true;
     }
 
     if (checked) {
       _that.data.checkedTags = _that.data.checkedTags.filter(function (v, _, __) {
         return v !== tag;
+      });
+
+      _that.setData!({
+        checkedTags: _that.data.checkedTags
       });
 
     } else {
@@ -350,7 +386,7 @@ Page({
         _that.setData!({
           checkedTags: _that.data.checkedTags
         });
-        
+
       }
     }
     //$(this).toggleClass("btn-primary btn-secondary");
