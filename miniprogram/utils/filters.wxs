@@ -1,8 +1,23 @@
 var filters = {
-  toFix: function (value) {
-    return value.toFixed(2)//此处2为保留两位小数
+  toFix: function(value) {
+    return value.toFixed(2) //此处2为保留两位小数
+  },
+  include: function(array, value) {
+    console.log("------------");
+    console.log(array);
+    console.log(value);
+    return array.includes(value)
   }
 }
 module.exports = {
-  toFix: filters.toFix
+  toFix: filters.toFix,
+  include: filters.include,
+  touchmove: function (event, instance) {
+    console.log('log event', JSON.stringify(event))
+  },
+  propObserver: function (newValue, oldValue, ownerInstance, instance) {
+    console.log('prop observer', newValue, oldValue)
+    console.log(JSON.stringify(ownerInstance));
+    console.log(JSON.stringify(instance));
+  }
 }

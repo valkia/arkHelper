@@ -16,8 +16,8 @@
 		"urlCheck": false,
 		"es6": true,
 		"enhance": true,
-		"postcss": false,
-		"minified": false,
+		"postcss": true,
+		"minified": true,
 		"newFeature": true,
 		"coverView": true,
 		"nodeModules": false,
@@ -29,7 +29,8 @@
 			"ignore": [],
 			"disablePlugins": [],
 			"outputPath": ""
-		}
+		},
+		"uglifyFileName": true
 	},
 	"appid": "wx4686008e8ed9fc7d",
 	"simulatorType": "wechat",

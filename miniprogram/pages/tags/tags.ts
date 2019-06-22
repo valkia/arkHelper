@@ -1,5 +1,6 @@
 //tags.js
 var app = getApp()
+//@ts-ignore
 import jsonData = require('/data.js');
 
 class HeroBasic {
@@ -17,62 +18,62 @@ class HeroBasic {
 
 }
 
-class Hero extends HeroBasic {
-  camp?: string;
-  sex?: string;
-  characteristic?: string;
-  tags?: string[];
-  hidden?: boolean;
-  "name-en"?: string;
+// class Hero extends HeroBasic {
+//   camp?: string;
+//   sex?: string;
+//   characteristic?: string;
+//   tags?: string[];
+//   hidden?: boolean;
+//   "name-en"?: string;
 
 
-  constructor(name: string, camp: string, type: string, level: number, sex: string, characteristic: string, tags: [], hidden: boolean, name_en: string, img: string) {
-    super(name, type, level, img);
-    this.camp = camp;
-    this.sex = sex;
-    this.characteristic = characteristic;
-    this.tags = tags;
-    this.hidden = hidden;
-    this["name-en"] = name_en;
+//   constructor(name: string, camp: string, type: string, level: number, sex: string, characteristic: string, tags: [], hidden: boolean, name_en: string, img: string) {
+//     super(name, type, level, img);
+//     this.camp = camp;
+//     this.sex = sex;
+//     this.characteristic = characteristic;
+//     this.tags = tags;
+//     this.hidden = hidden;
+//     this["name-en"] = name_en;
 
-  }
-}
+//   }
+// }
 
 
 
 Page({
   data: {
+    //@ts-ignore 
+    CustomBar: app.globalData.CustomBar,
     tags: [
       {
         "cn": "资质",
-        "cntags": ["新手", "资深干员", "高级资深干员"]
+        "cntags": [{ name: "新手", showFlag: false }, { name: "资深干员", showFlag: false }, { name: "高级资深干员", showFlag: false }]
       },
       {
         "cn": "位置",
-        "cntags": ["远程位", "近战位"]
+        "cntags": [{ name: "远程位", showFlag: false }, { name: "近战位", showFlag: false }]
       },
       {
         "cn": "性别",
-        "cntags": ["男性干员", "女性干员"]
+        "cntags": [{ name: "男性干员", showFlag: false }, { name: "女性干员", showFlag: false }]
       },
       {
         "cn": "种类",
-        "cntags": ["先锋干员", "狙击干员", "医疗干员", "术师干员", "近卫干员", "重装干员", "辅助干员", "特种干员"]
+        "cntags": [{ name: "先锋干员", showFlag: false }, { name: "狙击干员", showFlag: false }, { name: "医疗干员", showFlag: false }, { name: "术师干员", showFlag: false }, { name: "近卫干员", showFlag: false }, { name: "重装干员", showFlag: false }, { name: "辅助干员", showFlag: false }, { name: "特种干员", showFlag: false }]
 
       },
       {
         "cn": "词缀",
-        "cntags": ["治疗", "支援", "输出", "群攻", "减速", "生存", "防护", "削弱", "位移", "控场", "爆发", "召唤",
-          "快速复活", "费用回复"]
+        "cntags": [{ name: "治疗", showFlag: false }, { name: "支援", showFlag: false }, { name: "输出", showFlag: false }, { name: "群攻", showFlag: false }, { name: "减速", showFlag: false }, { name: "生存", showFlag: false }, { name: "防护", showFlag: false }, { name: "削弱", showFlag: false }, { name: "位移", showFlag: false }, { name: "控场", showFlag: false }, { name: "爆发", showFlag: false }, { name: "召唤", showFlag: false }, { name: "快速复活", showFlag: false }, { name: "费用回复", showFlag: false }]
       }
     ],
     tags_aval: {} = {},
-    all_chars: {} = {},
-    avg_char_tag: 0,
     checkedTags: [] = [],
     checkedTagsTL: [] = [],
     possible: [] = [],
-    optStars: [] = []
+    optStars: [] = [],
+    showStars: [] = [{ name: "清空", showFlag: true }, { name: "6", showFlag: true }, { name: "5", showFlag: true }, { name: "4", showFlag: true }, { name: "3", showFlag: true }, { name: "2", showFlag: true }, { name: "1", showFlag: true }]
 
   },
 
@@ -82,23 +83,99 @@ Page({
     //     return formatTime(new Date(log))
     //   })
     // })
-    console.log(jsonData.dataList);
+
     this.init();
 
   },
 
+  search(e:any) {
+    let keyword = e.detail.value;
+    let keyArray: [] = keyword.split(/\s+/);
+
+
+    let that = this;
+
+    this.data.tags.forEach((t: any) => {
+      t['cntags'].forEach((t2: any) => {
+        if (t2.showFlag === true) {
+          t2.showFlag = false;
+        }
+      })
+    })
+
+    that.setData!({
+      checkedTags: [],
+      tags: this.data.tags
+    });
+
+if(keyArray.length===0) that.calc();
+
+
+    keyArray.forEach(key => {
+
+      let times = 0;
+      let result = "";
+      this.data.tags.forEach((t: any) => {
+
+        t['cntags'].forEach((t2: any) => {
+          if (t2.name.includes(key)) {
+            times++
+            result = t2.name;
+          }
+
+        })
+      })
+      if (times === 1) {
+        console.log(result);
+        that.clickTagF(result, false);
+      }
+
+    })
+  },
+
   clickStars(event: any) {
     console.log(event);
-    let _that = this;
     let value = event.target.dataset.title;
     if (value === '清空') {
-      this.setData!({ optStars: [] });
-    } else {
-      this.data.optStars = this.data.optStars.filter(function (v, _, __) {
-        return v !== value;
-      });
-      this.setData!({ optStars: this.data.optStars });
+      this.data.showStars.forEach((s: any) => {
+
+        s.showFlag = false;
+
+      })
+      this.data.showStars[0] = { name: "全选", showFlag: true };
+      this.setData!({ optStars: [], showStars: this.data.showStars });
     }
+    if (value === '全选') {
+      this.data.showStars.forEach((s: any) => {
+
+        s.showFlag = true;
+
+      })
+      this.data.showStars[0] = { name: "清空", showFlag: true };
+      this.setData!({ optStars: ['清空', '6', '5', '4', '3', '2', '1'], showStars: this.data.showStars });
+    }
+    else {
+
+      this.data.showStars.forEach((s: any) => {
+        if (s.name === value) {
+          s.showFlag = !s.showFlag;
+        }
+      })
+//@ts-ignore
+      if (this.data.optStars.includes(value)) {
+        this.data.optStars = this.data.optStars.filter(function (v, _, __) {
+          return v !== value;
+        });
+
+
+      } else {
+        //@ts-ignore
+        this.data.optStars.push(value);
+      }
+
+      this.setData!({ optStars: this.data.optStars, showStars: this.data.showStars });
+    }
+    this.calc();
   },
 
   bindViewTap() {
@@ -151,6 +228,7 @@ Page({
           // console.log(char);
           //@ts-ignore 
           let tmp: HeroBasic[] = that.data.tags_aval[tags[i]];
+          //@ts-ignore 
           tmp.forEach((tgch: HeroBasic) => {
             if (char.name === tgch.name) {
               reduced_chars.push(char);
@@ -200,77 +278,14 @@ Page({
           0)));
     });
     //let no = 1;
-    combs.forEach(function (comb: any) {
+    //@ts-ignore 
+    combs.forEach( (comb: any)=> {
       if (!comb.possible || comb.possible.length === 0) return false;
-      let chars = comb.possible;
-
-      let tags = comb.tags;
-      console.log(tags);
-      let tagsTL = comb.tagsTL;
-      let chars_html: any[];
-      let colors = {
-        1: "dark",
-        2: "light",
-        3: "success",
-        4: "info",
-        5: "warning",
-        6: "danger"
-      };
+      
       comb.possible.sort(function (a: any, b: any) {
         return a.level > b.level ? -1 : (a.level < b.level ? 1 : 0);
       });
-      let result: { tag: any[], scope: number }[] = [];
-      chars.forEach(function (char: HeroBasic, index: number) {
-        let tagsTmp: any[] = [];
-        for (let i = 0; i < tags.length; i++) {
-
-          tagsTmp.push(tags[i]);
-
-        }
-        let scope = Math.floor(comb.score * 100) / 100;
-        result.push({ tag: tagsTmp, scope: scope });
-
-      })
-      console.log(result);
-      // chars.forEach(function (_: any, char:any) {
-      //   let padding = showName && imageSize < 60 ? "padding-right: 4px" :
-      //     "padding-right: 1px";
-      //   let style = showImage ? "style=\"border-radius: 5px;padding: 1px 1px;" +
-      //     padding + ";\" " : "";
-      //   let buttonstyle = imageSize > 25 ?
-      //     "background-color: #AAA;border-radius: 4px;" :
-      //     "background-color: transparent;border-radius: 4px;";
-      //   chars_html.push("<button type=\"button\" class=\"btn btn-sm btn-" +
-      //     colors[char.level] + " btn-char my-1 d-none d-sm-inline\" " +
-      //     style + "title=\"" + char.name + "\">");
-      //   if (showImage) chars_html.push("<img style=\"" + buttonstyle +
-      //     "\"height=\"" + imageSize + "\" width=\"" + imageSize +
-      //     "\" src=\"img/chara/" + char.img + ".png\">   ");
-      //   if (imageSize > 60) chars_html.push("<div>");
-      //   if (showName) chars_html.push(char.name);
-      //   if (imageSize > 60) chars_html.push("</div>");
-      //   chars_html.push("</button>\n");
-      //   chars_html.push("<button type=\"button\" class=\"btn btn-sm btn-" +
-      //     colors[char.level] + " btn-char my-1 d-inline d-sm-none\" " +
-      //     "title=\"" + char.name + "\">" + char.name + "</button>\n");
-      // });
-      //let tags_html = [];
-      // for (let i = 0; i < tags.length; i++) {
-
-      //     tags_html.push(
-      //       '<button type="button" class="btn btn-sm btn-secondary btn-char my-1">' +
-      //       tags[i] + "</button>\n");
-
-      // }
-      // $("#tbody-recommend").append(
-      //   "<tr class=\"tr-recommd\">" +
-      //   "<td class=\"py-2 d-none d-sm-table-cell\">" + no++ + "</td>" +
-      //   "<td class=\"py-1\">" + tags_html.join("") + "</td><td class=\"py-1\">" +
-      //   chars_html.join("") +
-      //   "</td>" +
-      //   "<td class=\"py-2 d-none d-sm-table-cell\">" + Math.floor(comb.score *
-      //     100) / 100 + "</td>" +
-      //   "</tr>");
+      
 
     });
 
@@ -287,88 +302,105 @@ Page({
     let _that = this;
 
     //app.func.get('/akhr.json', {}, function (data: Hero[]) {
-    let data: Hero[] = jsonData.dataList;
-    this.setData!({ optStars: "['清空','6','5','4','3','2','1']" });
-    let tag_count = 0;
-    let char_tag_sum = 0;
+    //let data: Hero[] = jsonData.dataList;
+    this.setData!({ optStars: ['清空', '6', '5', '4', '3', '2', '1'] });
     // console.log(data);
+    this.setData!({ tags_aval: jsonData.aval })
 
 
 
+    // for (const key in data) {
+    //   if (data.hasOwnProperty(key)) {
+    //     const char = data[key];
+    //     if (char.hidden) continue;
+    //     char.tags!.push(char.type + "干员");
+    //     char.tags!.push(char.sex + "性干员");
+    //     let name = char.name;
+    //     char.tags!.forEach(function (tag: string) {
+    //       if (tag in _that.data.tags_aval) {
 
-    for (const key in data) {
-      if (data.hasOwnProperty(key)) {
-        const char = data[key];
-        if (char.hidden) continue;
-        char.tags!.push(char.type + "干员");
-        char.tags!.push(char.sex + "性干员");
-        let name = char.name;
-        char.tags!.forEach(function (tag: string) {
-          if (tag in _that.data.tags_aval) {
+    //         let tmp: { [key: string]: HeroBasic[] } = _that.data.tags_aval;
+    //         tmp[tag].push({
+    //           "name": name,
+    //           "img": char["name-en"],
+    //           "level": char.level,
+    //           "type": char.type
+    //         });
 
-            let tmp: { [key: string]: HeroBasic[] } = _that.data.tags_aval;
-            tmp[tag].push({
-              "name": name,
-              "img": char["name-en"],
-              "level": char.level,
-              "type": char.type
-            });
+    //         _that.setData!({ tags_aval: tmp })
 
-            _that.setData!({ tags_aval: tmp })
+    //       } else {
 
-          } else {
+    //         let tmp: { [key: string]: HeroBasic[] } = _that.data.tags_aval;
 
-            let tmp: { [key: string]: HeroBasic[] } = _that.data.tags_aval;
+    //         tmp[tag] = [{
+    //           "name": name,
+    //           "img": char["name-en"],
+    //           "level": char.level,
+    //           "type": char.type
+    //         }];
 
-            tmp[tag] = [{
-              "name": name,
-              "img": char["name-en"],
-              "level": char.level,
-              "type": char.type
-            }];
+    //         _that.setData!({ tags_aval: tmp })
 
-            _that.setData!({ tags_aval: tmp })
-            tag_count++;
-          }
-          char_tag_sum++;
-        });
-        let tmp: { [key: string]: Hero } = _that.data.all_chars;
-        tmp.name = {
-          'level': char.level,
-          'tags': char.tags
-        };
-        _that.setData!({ all_chars: tmp })
-      }
-    }
+    //       }
 
+    //     });
 
+    //   }
+    // }
 
-
-    _that.setData!({ avg_char_tag: (char_tag_sum / tag_count) });
 
     _that.calc();
     //});
   },
   clickTag(event: any) {
     console.log(event);
-    let _that = this;
     let tag = event.target.dataset.title;
+    this.clickTagF(tag, true);
+  },
+  // 是否是点击进来的标志,true的时候才会去掉点击标志
+  clickTagF(tag: string, clickFlag: boolean) {
+    let _that = this;
+
     let checked = false;
 
+    if (!clickFlag) {
+      this.data.tags.forEach((t: any) => {
+
+        t['cntags'].forEach((t2: any) => {
+          if (t2.name === tag && t2.showFlag === false) {
+            t2.showFlag = true;
+          }
+
+        })
+      })
+    } else {
+      this.data.tags.forEach((t: any) => {
+
+        t['cntags'].forEach((t2: any) => {
+          if (t2.name === tag) {
+            t2.showFlag = !t2.showFlag;
+          }
+
+        })
+      })
+    }
     //是否点过
+    //@ts-ignore
     if ((_that.data.checkedTags).includes(tag)) {
       checked = true;
     }
 
     if (checked) {
-      _that.data.checkedTags = _that.data.checkedTags.filter(function (v, _, __) {
-        return v !== tag;
-      });
+      if (clickFlag) {
+        _that.data.checkedTags = _that.data.checkedTags.filter(function (v, _, __) {
+          return v !== tag;
+        });
 
-      _that.setData!({
-        checkedTags: _that.data.checkedTags
-      });
-
+        _that.setData!({
+          checkedTags: _that.data.checkedTags
+        });
+      }
     } else {
       if (_that.data.checkedTags.length >= 6) {
 
@@ -389,12 +421,12 @@ Page({
 
       }
     }
+    _that.setData!({ tags: _that.data.tags });
+
     //$(this).toggleClass("btn-primary btn-secondary");
     _that.calc();
 
 
-
   }
-
 
 })

@@ -1,5 +1,9 @@
 /* tags/tags.wxss */
 
+page{
+  padding-top: 100rpx;
+}
+
 .tag-title {
   text-align: center;
   padding: 10rpx;
@@ -7,22 +11,71 @@
   flex-basis: 17%;
 }
 
+
+
 .tag-text {
   text-align: center;
   padding: 10rpx;
   margin: 8rpx;
-  flex-basis: 30%;
+  flex-basis: 20%;
 }
-.tag-number{
+
+.tag-number {
   text-align: center;
   padding: 10rpx;
   margin: 8rpx;
-  flex-basis: 12%;
+  width: 12%;
 }
+
 .tag-wrap {
   flex-basis: 80%;
 }
 
+.possible-wrap {
+  flex-basis: 100%;
+  border-bottom: 1px solid #ddd;
+}
+.possible-title {
+  padding: 10rpx;
+  flex-basis: 100%;
+  
+}
+
+.possible-text {
+  text-align: center;
+  padding: 10rpx;
+  flex-basis: 25%;
+}
 .padding {
   padding: 15rpx 10rpx;
+}
+
+.star{
+  margin: 8rpx;
+}
+
+.star-6 {
+  background: #f0e028!important;
+}
+
+.star-5 {
+  background: #f0a94d!important;
+}
+
+.star-4 {
+  background: #8960ce!important;
+  color: white;
+}
+
+.star-3 {
+  background: #618bf5!important;
+  color: white;
+}
+
+.star-2 {
+  background: #dedede!important;
+}
+
+.star-1 {
+  background: #dedede!important;
 }
