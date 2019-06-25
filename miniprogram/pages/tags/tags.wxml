@@ -1,7 +1,7 @@
 <!--tags/tags.wxml-->
 <wxs module="filters" src="../../utils/filters.wxs"></wxs>
-<cu-custom bgColor="bg-gradual-blue" >
-<!-- isBack="{{true}}" -->
+<cu-custom bgColor="bg-gradual-blue">
+  <!-- isBack="{{true}}" -->
   <!-- <view slot="backText">返回</view> -->
   <view slot="content">明日方舟助手</view>
 </cu-custom>
@@ -14,61 +14,47 @@
 <text style="color:green">{{checkedTags}}</text> -->
 
 <view class="cu-bar bg-white search fixed" style="top:{{CustomBar}}px">
-  <view class="search-form round">
+  <view class="search-form ">
     <text class="cuIcon-search"></text>
-    <input type="text" placeholder="搜索例子：男 医疗 治疗 （空格隔开，支持模糊搜索）" confirm-type="search" bindinput="search"></input>
+    <input type="text" value="{{keywords}}" placeholder="男 医疗 治疗 （空格隔开，支持模糊搜索）" confirm-type="search" bindinput="search"></input>
   </view>
-  
+<button class="cu-btn  bg-grey" style="margin-right: 10px;" bindtap="clean">清空</button>
 </view>
 
 <view class="bg-white padding">
-<!-- <view class="flex flex-wrap">
+  <!-- <view class="flex flex-wrap">
  {{checkedTags}}
 </view> -->
   <view class="flex flex-wrap">
-  <!-- bg-black -->
-  
-    <view wx:for="{{showStars}}"   wx:for-item="item"  bindtap="clickStars" data-title='{{item.name}}'  class="tag-number cu-tag {{item.showFlag?'bg-olive':'line-olive'}}" >
-
-        {{item.name}}
-      
-    </view>
+    <view wx:for="{{showStars}}" wx:for-item="item" bindtap="clickStars" data-title='{{item.name}}' class="tag-number cu-tag {{item.showFlag?'bg-olive':'line-olive'}}">{{item.name}}</view>
   </view>
-  </view>
+</view>
 
-  <view class="bg-white padding" >
-    <view>
-      <view class="flex flex-wrap" wx:for="{{tags}}" wx:for-item="tag">
-        <view class="tag-title cu-tag bg-grey.light">{{tag.cn}}</view>
-        <view class="tag-wrap">
-          <view class="flex flex-wrap">
-            <view class="tag-text cu-tag {{t.showFlag?'bg-olive':'line-olive'}}" wx:for="{{tag.cntags}}" wx:for-item="t" bindtap="clickTag" data-title='{{t.name}}'>
-            
-              {{t.name}}
-            </view>
-          </view>
+<view class="bg-white padding">
+  <view>
+    <view class="flex flex-wrap" wx:for="{{tags}}" wx:for-item="tag">
+      <view class="tag-title cu-tag bg-grey.light">{{tag.cn}}</view>
+      <view class="tag-wrap">
+        <view class="flex flex-wrap">
+          <view class="tag-text cu-tag {{t.showFlag?'bg-olive':'line-olive'}}" wx:for="{{tag.cntags}}" wx:for-item="t" bindtap="clickTag" data-title='{{t.name}}'>{{t.name}}</view>
         </view>
       </view>
     </view>
   </view>
+</view>
 
-  <view class="bg-white padding">
-    <view>
-      <view class="flex flex-wrap" wx:for="{{possible}}" wx:for-item="item" wx:if="{{item.possible.length>0}}">
-        <!-- {{filters.toFix(item.score)}} -->
-        <view class="possible-title">
-          <view class="cu-tag bg-olive.light" wx:for="{{item.tags}}" wx:for-item="t">
-            {{t}}
-          </view>
-        </view>
-        <view class="possible-wrap">
-          <view class="flex flex-wrap">
-
-            <view class=" cu-tag star star-{{p.level}}" wx:for="{{item.possible}}" wx:for-item="p">
-              {{p.name}}
-            </view>
-          </view>
+<view class="bg-white padding">
+  <view>
+    <view class="flex flex-wrap" wx:for="{{possible}}" wx:for-item="item" wx:if="{{item.possible.length>0}}">
+      <!-- {{filters.toFix(item.score)}} -->
+      <view class="possible-title">
+        <view class="cu-tag bg-olive.light" wx:for="{{item.tags}}" wx:for-item="t">{{t}}</view>
+      </view>
+      <view class="possible-wrap">
+        <view class="flex flex-wrap">
+          <view class=" cu-tag star star-{{p.level}}" wx:for="{{item.possible}}" wx:for-item="p">{{p.name}}</view>
         </view>
       </view>
     </view>
   </view>
+</view>

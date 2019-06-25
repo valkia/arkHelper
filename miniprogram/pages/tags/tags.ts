@@ -73,7 +73,8 @@ Page({
     checkedTagsTL: [] = [],
     possible: [] = [],
     optStars: [] = [],
-    showStars: [] = [{ name: "清空", showFlag: true }, { name: "6", showFlag: true }, { name: "5", showFlag: true }, { name: "4", showFlag: true }, { name: "3", showFlag: true }, { name: "2", showFlag: true }, { name: "1", showFlag: true }]
+    showStars: [] = [{ name: "清空", showFlag: true }, { name: "6", showFlag: true }, { name: "5", showFlag: true }, { name: "4", showFlag: true }, { name: "3", showFlag: true }, { name: "2", showFlag: true }, { name: "1", showFlag: true }],
+    keywords: ""
 
   },
 
@@ -105,7 +106,8 @@ Page({
 
     that.setData!({
       checkedTags: [],
-      tags: this.data.tags
+      tags: this.data.tags,
+      keywords: keyword
     });
 
 if(keyArray.length===0) that.calc();
@@ -131,6 +133,23 @@ if(keyArray.length===0) that.calc();
       }
 
     })
+  },
+
+  clean(){
+    this.data.tags.forEach((t: any) => {
+      t['cntags'].forEach((t2: any) => {
+        if (t2.showFlag === true) {
+          t2.showFlag = false;
+        }
+      })
+    })
+
+    this.setData!({
+      checkedTags: [],
+      tags: this.data.tags,
+      keywords:[]
+    });
+    this.calc();
   },
 
   clickStars(event: any) {

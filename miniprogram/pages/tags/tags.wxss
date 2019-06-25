@@ -5,26 +5,32 @@ page{
 }
 
 .tag-title {
-  text-align: center;
+  /* text-align: center; */
   padding: 10rpx;
   margin: 8rpx;
   flex-basis: 17%;
+  text-align: justify;
+  text-justify: inter-ideograph
 }
 
 
 
 .tag-text {
-  text-align: center;
+  /* text-align: center; */
   padding: 10rpx;
   margin: 8rpx;
   flex-basis: 20%;
+  text-align: justify;
+  text-justify: inter-ideograph;
 }
 
 .tag-number {
-  text-align: center;
-  padding: 10rpx;
+  /* text-align: center; */
+  padding: 6rpx;
   margin: 8rpx;
-  width: 12%;
+  width: 10%;
+  text-align: justify;
+  text-justify: inter-ideograph
 }
 
 .tag-wrap {
@@ -42,9 +48,11 @@ page{
 }
 
 .possible-text {
-  text-align: center;
+  /* text-align: center; */
   padding: 10rpx;
   flex-basis: 25%;
+  text-align: justify;
+  text-justify: inter-ideograph
 }
 .padding {
   padding: 15rpx 10rpx;
