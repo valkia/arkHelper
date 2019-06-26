@@ -1,0 +1,7 @@
+<!--miniprogram/pages/book/heroList.wxml-->
+<view >
+<text>miniprogram/pages/book/heroList.wxml</text></view>
+<view><text>miniprogram/pages/book/heroList.wxml</text></view>
+<view><text>miniprogram/pages/book/heroList.wxml</text></view>
+<view><text>miniprogram/pages/book/heroList.wxml</text></view>
+<view bindtap="bindViewTap"><text>miniprogram/pages/book/heroList.wxml</text></view>

@@ -87,3 +87,14 @@ page{
 .star-1 {
   background: #dedede!important;
 }
+
+.share-btn{
+   border: 1px solid white;
+  font-size: 16px;
+  background: unset;
+  text-decoration: underline;
+}
+
+.share-btn::after{
+  border: 1px solid white;
+}

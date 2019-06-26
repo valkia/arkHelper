@@ -1,6 +1,6 @@
 <!--tags/tags.wxml-->
 <wxs module="filters" src="../../utils/filters.wxs"></wxs>
-<cu-custom bgColor="bg-gradual-blue">
+<cu-custom bgColor="bg-gradual-green">
   <!-- isBack="{{true}}" -->
   <!-- <view slot="backText">返回</view> -->
   <view slot="content">明日方舟助手</view>
@@ -18,7 +18,7 @@
     <text class="cuIcon-search"></text>
     <input type="text" value="{{keywords}}" placeholder="男 医疗 治疗 （空格隔开，支持模糊搜索）" confirm-type="search" bindinput="search"></input>
   </view>
-<button class="cu-btn  bg-grey" style="margin-right: 10px;" bindtap="clean">清空</button>
+  <button class="cu-btn  bg-grey" style="margin-right: 10px;" bindtap="clean">清空</button>
 </view>
 
 <view class="bg-white padding">
@@ -57,4 +57,36 @@
       </view>
     </view>
   </view>
+</view>
+
+<view class="bg-white padding">
+  <view class="cu-bar bg-white solid-bottom">
+    <view class="action">
+      <text class="cuIcon-title text-green"></text>说明
+    </view>
+  </view>
+  <view class="padding-xs flex align-center">
+
+    <view class="flex-sub text-left">
+      <view class="text-df padding">对照游戏中的招募标签选择上面的标签</view>
+      <view class="text-df padding">也可以在输入框中输入，每个标签都需要空格隔开</view>
+      <view class="text-df padding">输入框可以是单字，但如果该字在两个标签中出现，就无法匹配（例如 干员 就无法匹配）；也可以是完整的文本</view>
+      <view class="text-df padding">选择或输入标签后，下面出现的是标签组合可能出现的干员</view>
+      <view class="text-df padding">按星数排序，第一行是最推荐的标签组合</view>
+      <view class="text-df padding">选择完毕点击输入框右边的清空按钮即可重新输入</view>
+    </view>
+  </view>
+  <view class="cu-bar bg-white solid-bottom">
+    <view class="action">
+      <text class="cuIcon-title text-green"></text><button open-type="share" class="share-btn" hover-class="none">觉得不错？点击分享给你的朋友吧</button>
+    </view>
+  </view>
+<view class="padding-xs flex align-center">
+<view class="flex-sub text-left">
+      <view class="text-df padding">对照游戏中的招募标签选择上面的标签</view>
+    </view>
+
+
+
+</view>
 </view>

@@ -1,9 +1,11 @@
 {
   "pages": [
-    "pages/tags/tags",
     "pages/index/index",
-    "pages/logs/logs"
-    
+    "pages/logs/logs",
+    "pages/tags/tags",
+    "pages/book/heroList",
+    "pages/about/about/about",
+    "pages/about/logs/logs"
   ],
   "window": {
     "navigationBarBackgroundColor": "#39b54a",
@@ -14,5 +16,8 @@
   "usingComponents": {
     "cu-custom": "/colorui/components/cu-custom"
   },
-  "sitemapLocation": "sitemap.json"
+  "sitemapLocation": "sitemap.json",
+  "navigateToMiniProgramAppIdList": [
+    "wx8abaf00ee8c3202e"
+  ]
 }

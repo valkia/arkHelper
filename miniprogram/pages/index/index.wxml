@@ -1,13 +1,18 @@
 <!--index.wxml-->
-<view class="container">
-  <view class="userinfo">
-    <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
-    <block wx:else>
-      <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
-      <text class="userinfo-nickname">{{userInfo.nickName}}</text>
-    </block>
+<tags wx:if="{{PageCur=='basics'}}"></tags>
+<about wx:if="{{PageCur=='about'}}"></about>
+<view class="cu-bar tabbar bg-white shadow foot">
+  <view class="action" bindtap="NavChange" data-cur="basics">
+    <view class='cuIcon-cu-image'>
+     <text class=" lg {{PageCur=='basics'?'text-green cuIcon-friendaddfill':'text-gray cuIcon-friendadd'}}"></text>
+    </view>
+    <view class="{{PageCur=='basics'?'text-green':'text-gray'}}">招募</view>
   </view>
-  <view class="usermotto">
-    <text class="user-motto">{{motto}}</text>
+
+  <view class="action" bindtap="NavChange" data-cur="about">
+    <view class='cuIcon-cu-image'>
+     <text class=" lg {{PageCur=='about'?'text-green cuIcon-homefill':'text-gray cuIcon-home'}}"></text>
+    </view>
+    <view class="{{PageCur=='about'?'text-green':'text-gray'}}">关于</view>
   </view>
 </view>

@@ -1,0 +1,54 @@
+<cu-custom bgColor="bg-gradual-green" isBack="{{true}}"><view slot="backText">返回</view><view slot="content">更新日志</view></cu-custom>
+<view class="cu-timeline">
+  <view class="cu-item text-green">
+    <view class="bg-gradual-green content shadow">
+      <view class="cu-capsule radius">
+        <view class="cu-tag bg-white text-green">v1.1.0</view>
+        <view class="cu-tag line-white">2019/06/26</view>
+      </view>
+      <view class="margin-top-sm text-content">
+        <view>1.招募页面增加说明和分享</view>
+        <view>2.增加了关于页面</view>
+        <view>3.关于页面也可以点击右上角分享</view>
+        <view>4.增加小程序更新日志</view>
+        <view>5.增加联系开发功能</view>
+        <view>6.增加吐槽建议功能</view>
+        <view>7.增加赞赏二维码</view>
+      </view>
+    </view>   
+  </view>
+  <view class="cu-item text-green">
+    <view class="bg-green content shadow">
+      <view class="cu-capsule radius">
+        <view class="cu-tag bg-white text-green">v1.0.2</view>
+        <view class="cu-tag line-white">2019/6/25</view>
+      </view>
+      <view class="margin-top-sm text-content">
+        <view>招募页增加清空按钮</view>
+      </view>
+    </view>
+  </view>
+  <view class="cu-item text-green">
+    <view class="bg-green content shadow">
+      <view class="cu-capsule radius">
+        <view class="cu-tag bg-white text-green">v1.0.1</view>
+        <view class="cu-tag line-white">2019/6/25</view>
+      </view>
+      <view class="margin-top-sm text-content">
+        <view>招募页增加通过输入文字来选择标签</view>
+      </view>
+    </view>
+  </view>
+  <view class="cu-item text-green">
+    <view class="bg-green content shadow">
+      <view class="cu-capsule radius">
+        <view class="cu-tag bg-white text-green">v1.0.0</view>
+        <view class="cu-tag line-white">2019/6/24</view>
+      </view>
+      <view class="margin-top-sm text-content">
+      <view>1.0版本上线</view>
+      <view>招募页面</view>
+      </view>
+    </view>
+  </view>
+</view>

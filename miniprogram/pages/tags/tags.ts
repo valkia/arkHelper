@@ -41,9 +41,12 @@ class HeroBasic {
 
 
 
-Page({
+Component({
+  options: {
+    addGlobalClass: true,
+  },
   data: {
-    //@ts-ignore 
+
     CustomBar: app.globalData.CustomBar,
     tags: [
       {
@@ -71,381 +74,386 @@ Page({
     tags_aval: {} = {},
     checkedTags: [] = [],
     checkedTagsTL: [] = [],
-    possible: [] = [],
-    optStars: [] = [],
+    possible: [] = [{}],
+    optStars: [] = [""],
     showStars: [] = [{ name: "清空", showFlag: true }, { name: "6", showFlag: true }, { name: "5", showFlag: true }, { name: "4", showFlag: true }, { name: "3", showFlag: true }, { name: "2", showFlag: true }, { name: "1", showFlag: true }],
     keywords: ""
 
   },
 
-  onLoad() {
-    // this.setData!({
-    //   logs: (wx.getStorageSync('logs') || []).map((log: number) => {
-    //     return formatTime(new Date(log))
-    //   })
-    // })
 
-    this.init();
+  methods: {
 
-  },
+    onLoad(){
+      console.log("onload333");
+      this.init();
+    },
 
-  search(e:any) {
-    let keyword = e.detail.value;
-    let keyArray: [] = keyword.split(/\s+/);
+    search(e: any) {
+      let keyword = e.detail.value;
+      let keyArray: [] = keyword.split(/\s+/);
 
 
-    let that = this;
-
-    this.data.tags.forEach((t: any) => {
-      t['cntags'].forEach((t2: any) => {
-        if (t2.showFlag === true) {
-          t2.showFlag = false;
-        }
-      })
-    })
-
-    that.setData!({
-      checkedTags: [],
-      tags: this.data.tags,
-      keywords: keyword
-    });
-
-if(keyArray.length===0) that.calc();
-
-
-    keyArray.forEach(key => {
-
-      let times = 0;
-      let result = "";
+      let that = this;
       this.data.tags.forEach((t: any) => {
-
         t['cntags'].forEach((t2: any) => {
-          if (t2.name.includes(key)) {
-            times++
-            result = t2.name;
+          if (t2.showFlag === true) {
+            t2.showFlag = false;
           }
-
         })
       })
-      if (times === 1) {
-        console.log(result);
-        that.clickTagF(result, false);
-      }
 
-    })
-  },
-
-  clean(){
-    this.data.tags.forEach((t: any) => {
-      t['cntags'].forEach((t2: any) => {
-        if (t2.showFlag === true) {
-          t2.showFlag = false;
-        }
-      })
-    })
-
-    this.setData!({
-      checkedTags: [],
-      tags: this.data.tags,
-      keywords:[]
-    });
-    this.calc();
-  },
-
-  clickStars(event: any) {
-    console.log(event);
-    let value = event.target.dataset.title;
-    if (value === '清空') {
-      this.data.showStars.forEach((s: any) => {
-
-        s.showFlag = false;
-
-      })
-      this.data.showStars[0] = { name: "全选", showFlag: true };
-      this.setData!({ optStars: [], showStars: this.data.showStars });
-    }
-    if (value === '全选') {
-      this.data.showStars.forEach((s: any) => {
-
-        s.showFlag = true;
-
-      })
-      this.data.showStars[0] = { name: "清空", showFlag: true };
-      this.setData!({ optStars: ['清空', '6', '5', '4', '3', '2', '1'], showStars: this.data.showStars });
-    }
-    else {
-
-      this.data.showStars.forEach((s: any) => {
-        if (s.name === value) {
-          s.showFlag = !s.showFlag;
-        }
-      })
-//@ts-ignore
-      if (this.data.optStars.includes(value)) {
-        this.data.optStars = this.data.optStars.filter(function (v, _, __) {
-          return v !== value;
-        });
-
-
-      } else {
-        //@ts-ignore
-        this.data.optStars.push(value);
-      }
-
-      this.setData!({ optStars: this.data.optStars, showStars: this.data.showStars });
-    }
-    this.calc();
-  },
-
-  bindViewTap() {
-    wx.navigateTo({
-      url: '../index/index'
-    })
-  },
-
-  calc() {
-
-    let len = this.data.checkedTags.length;
-    let count = Math.pow(2, this.data.checkedTags.length);
-    let combs = [];
-    for (let i = 0; i < count; i++) {
-      let ts: [] = [];
-      let tsTL: [] = [];
-      for (let j = 0, mask = 1; j < len; j++) {
-        if ((i & mask) !== 0) {
-          ts.push(this.data.checkedTags[j]);
-          tsTL.push(this.data.checkedTagsTL[j]);
-        }
-        mask = mask * 2;
-      }
-      combs.push({
-        "tags": ts,
-        "tagsTL": tsTL,
-        "score": 0.0,
-        "possible": []
+      that.setData!({
+        checkedTags: [],
+        tags: this.data.tags,
+        keywords: keyword
       });
-    }
-    // console.log(combs);
-    let optStars: string[] = this.data.optStars;
-    // $(".btn-opt").each(function (_, __) {
-    //   if ($(this).attr("opt-id") === "all" || $(this).hasClass("btn-secondary")) return;
-    //   optStars.push($(this).attr("opt-id"));
-    // });
-    //console.log(optStars);
-    //$("#tbody-recommend").html("");
-    var that = this;//把this对象复制到临时变量that
-    combs.forEach((comb: { [key: string]: any }) => {
-      let tags: string[] = comb.tags;
-      if (tags.length === 0 || tags.length > 3) return;
-      //@ts-ignore 
-      let chars: HeroBasic[] = [...that.data.tags_aval[tags[0]]];//切割每个字符
-      for (let i = 1; i < tags.length; i++) {
-        let reduced_chars: HeroBasic[] = [];
 
-        chars.forEach((char: HeroBasic) => {
-          // console.log(tags_aval[tags[i]]);
-          // console.log(char);
+      if (keyArray.length === 0) that.calc();
+
+
+      keyArray.forEach(key => {
+
+        let times = 0;
+        let result = "";
+        this.data.tags.forEach((t: any) => {
+
+          t['cntags'].forEach((t2: any) => {
+            if (t2.name.includes(key)) {
+              times++
+              result = t2.name;
+            }
+
+          })
+        })
+        if (times === 1) {
+          console.log(result);
+          that.clickTagF(result, false);
+        }
+
+      })
+    },
+
+    clean() {
+      this.data.tags.forEach((t: any) => {
+        t['cntags'].forEach((t2: any) => {
+          if (t2.showFlag === true) {
+            t2.showFlag = false;
+          }
+        })
+      })
+
+      this.setData!({
+        checkedTags: [],
+        tags: this.data.tags,
+        keywords: ""
+      });
+      this.calc();
+    },
+
+    clickStars(event: any) {
+      console.log(event);
+      let value = event.target.dataset.title;
+      if (value === '清空') {
+        this.data.showStars.forEach((s: any) => {
+
+          s.showFlag = false;
+
+        })
+        this.data.showStars[0] = { name: "全选", showFlag: true };
+        this.setData!({ optStars: [], showStars: this.data.showStars });
+      }
+      if (value === '全选') {
+        this.data.showStars.forEach((s: any) => {
+
+          s.showFlag = true;
+
+        })
+        this.data.showStars[0] = { name: "清空", showFlag: true };
+        this.setData!({ optStars: ['清空', '6', '5', '4', '3', '2', '1'], showStars: this.data.showStars });
+      }
+      else {
+
+        this.data.showStars.forEach((s: any) => {
+          if (s.name === value) {
+            s.showFlag = !s.showFlag;
+          }
+        })
+        let tmp = this.data.optStars;
+        if (this.data.optStars.includes(value)) {
+          tmp = this.data.optStars.filter(function (v, _, __) {
+            return v !== value;
+          });
+
+
+        } else {
+          tmp.push(value);
+        }
+
+        this.setData!({ optStars: tmp, showStars: this.data.showStars });
+      }
+      this.calc();
+    },
+
+    bindViewTap() {
+      wx.navigateTo({
+        url: '../index/index'
+      })
+    },
+
+    calc() {
+
+      let len = this.data.checkedTags.length;
+      let count = Math.pow(2, this.data.checkedTags.length);
+      let combs = [];
+      for (let i = 0; i < count; i++) {
+        let ts: [] = [];
+        let tsTL: [] = [];
+        for (let j = 0, mask = 1; j < len; j++) {
+          if ((i & mask) !== 0) {
+            ts.push(this.data.checkedTags[j]);
+            tsTL.push(this.data.checkedTagsTL[j]);
+          }
+          mask = mask * 2;
+        }
+        combs.push({
+          "tags": ts,
+          "tagsTL": tsTL,
+          "score": 0.0,
+          "possible": []
+        });
+      }
+      // console.log(combs);
+      let optStars: string[] = this.data.optStars;
+      // $(".btn-opt").each(function (_, __) {
+      //   if ($(this).attr("opt-id") === "all" || $(this).hasClass("btn-secondary")) return;
+      //   optStars.push($(this).attr("opt-id"));
+      // });
+      //console.log(optStars);
+      //$("#tbody-recommend").html("");
+      var that = this;//把this对象复制到临时变量that
+      combs.forEach((comb: { [key: string]: any }) => {
+        let tags: string[] = comb.tags;
+        if (tags.length === 0 || tags.length > 3) return;
+        //@ts-ignore 
+        let chars: HeroBasic[] = [...that.data.tags_aval[tags[0]]];//切割每个字符
+        for (let i = 1; i < tags.length; i++) {
+          let reduced_chars: HeroBasic[] = [];
+
+          chars.forEach((char: HeroBasic) => {
+            // console.log(tags_aval[tags[i]]);
+            // console.log(char);
+            //@ts-ignore 
+            let tmp: HeroBasic[] = that.data.tags_aval[tags[i]];
+            //@ts-ignore 
+            tmp.forEach((tgch: HeroBasic) => {
+              if (char.name === tgch.name) {
+                reduced_chars.push(char);
+                return false;
+              }
+            });
+          });
           //@ts-ignore 
-          let tmp: HeroBasic[] = that.data.tags_aval[tags[i]];
-          //@ts-ignore 
-          tmp.forEach((tgch: HeroBasic) => {
-            if (char.name === tgch.name) {
-              reduced_chars.push(char);
-              return false;
+          chars = reduced_chars;
+        }
+
+        if (chars.length === 0) return;
+        //@ts-ignore 
+        if (!tags.includes("高级资深干员")) {
+          // console.log(tags.join(",") + " 不含(高级)资深干员");
+          let reduce6: any[] = [];
+          chars.forEach(function (char: any) {
+            if (char.level !== 6) {
+              reduce6.push(char);
             }
           });
-        });
-        //@ts-ignore 
-        chars = reduced_chars;
-      }
-
-      if (chars.length === 0) return;
-      //@ts-ignore 
-      if (!tags.includes("高级资深干员")) {
-        // console.log(tags.join(",") + " 不含(高级)资深干员");
-        let reduce6: any[] = [];
-        chars.forEach(function (char: any) {
-          if (char.level !== 6) {
-            reduce6.push(char);
-          }
-        });
-        chars = reduce6;
-      }
-      let filtered_chars: HeroBasic[] = [];
-      chars.forEach(function (char: HeroBasic) {
-        //console.log(char.level);
-        //@ts-ignore 
-        if (optStars.includes(char.level.toString())) {
-          filtered_chars.push(char);
+          chars = reduce6;
         }
+        let filtered_chars: HeroBasic[] = [];
+        chars.forEach(function (char: HeroBasic) {
+          //console.log(char.level);
+          //@ts-ignore 
+          if (optStars.includes(char.level.toString())) {
+            filtered_chars.push(char);
+          }
+        });
+        //@ts-ignore 
+        chars = filtered_chars;
+
+        comb.possible = chars;
+        if (chars.length === 0) return;
+        let s = 0;
+        chars.forEach(function (char: any) {
+          s += char.level;
+        });
+        s = s / chars.length;
+        comb.score = s + 0.1 / tags.length + 0.9 / chars.length;
       });
+      combs.sort(function (a, b) {
+        return a.score > b.score ? -1 : (a.score < b.score ? 1 :
+          (a.tags.length > b.tags.length ? 1 : (a.tags.length < b.tags.length ? -1 :
+            0)));
+      });
+      //let no = 1;
       //@ts-ignore 
-      chars = filtered_chars;
+      combs.forEach((comb: any) => {
+        if (!comb.possible || comb.possible.length === 0) return false;
 
-      comb.possible = chars;
-      if (chars.length === 0) return;
-      let s = 0;
-      chars.forEach(function (char: any) {
-        s += char.level;
-      });
-      s = s / chars.length;
-      comb.score = s + 0.1 / tags.length + 0.9 / chars.length;
-    });
-    combs.sort(function (a, b) {
-      return a.score > b.score ? -1 : (a.score < b.score ? 1 :
-        (a.tags.length > b.tags.length ? 1 : (a.tags.length < b.tags.length ? -1 :
-          0)));
-    });
-    //let no = 1;
-    //@ts-ignore 
-    combs.forEach( (comb: any)=> {
-      if (!comb.possible || comb.possible.length === 0) return false;
-      
-      comb.possible.sort(function (a: any, b: any) {
-        return a.level > b.level ? -1 : (a.level < b.level ? 1 : 0);
-      });
-      
-
-    });
-
-
-
-    // if (lang !== 'cn') $('[data-toggle="tooltip"]').tooltip();
-    //https://ak.graueneko.xyz/akhr.json
-
-
-    that.setData!({ possible: combs });
-
-  },
-  init() {
-    let _that = this;
-
-    //app.func.get('/akhr.json', {}, function (data: Hero[]) {
-    //let data: Hero[] = jsonData.dataList;
-    this.setData!({ optStars: ['清空', '6', '5', '4', '3', '2', '1'] });
-    // console.log(data);
-    this.setData!({ tags_aval: jsonData.aval })
-
-
-
-    // for (const key in data) {
-    //   if (data.hasOwnProperty(key)) {
-    //     const char = data[key];
-    //     if (char.hidden) continue;
-    //     char.tags!.push(char.type + "干员");
-    //     char.tags!.push(char.sex + "性干员");
-    //     let name = char.name;
-    //     char.tags!.forEach(function (tag: string) {
-    //       if (tag in _that.data.tags_aval) {
-
-    //         let tmp: { [key: string]: HeroBasic[] } = _that.data.tags_aval;
-    //         tmp[tag].push({
-    //           "name": name,
-    //           "img": char["name-en"],
-    //           "level": char.level,
-    //           "type": char.type
-    //         });
-
-    //         _that.setData!({ tags_aval: tmp })
-
-    //       } else {
-
-    //         let tmp: { [key: string]: HeroBasic[] } = _that.data.tags_aval;
-
-    //         tmp[tag] = [{
-    //           "name": name,
-    //           "img": char["name-en"],
-    //           "level": char.level,
-    //           "type": char.type
-    //         }];
-
-    //         _that.setData!({ tags_aval: tmp })
-
-    //       }
-
-    //     });
-
-    //   }
-    // }
-
-
-    _that.calc();
-    //});
-  },
-  clickTag(event: any) {
-    console.log(event);
-    let tag = event.target.dataset.title;
-    this.clickTagF(tag, true);
-  },
-  // 是否是点击进来的标志,true的时候才会去掉点击标志
-  clickTagF(tag: string, clickFlag: boolean) {
-    let _that = this;
-
-    let checked = false;
-
-    if (!clickFlag) {
-      this.data.tags.forEach((t: any) => {
-
-        t['cntags'].forEach((t2: any) => {
-          if (t2.name === tag && t2.showFlag === false) {
-            t2.showFlag = true;
-          }
-
-        })
-      })
-    } else {
-      this.data.tags.forEach((t: any) => {
-
-        t['cntags'].forEach((t2: any) => {
-          if (t2.name === tag) {
-            t2.showFlag = !t2.showFlag;
-          }
-
-        })
-      })
-    }
-    //是否点过
-    //@ts-ignore
-    if ((_that.data.checkedTags).includes(tag)) {
-      checked = true;
-    }
-
-    if (checked) {
-      if (clickFlag) {
-        _that.data.checkedTags = _that.data.checkedTags.filter(function (v, _, __) {
-          return v !== tag;
+        comb.possible.sort(function (a: any, b: any) {
+          return a.level > b.level ? -1 : (a.level < b.level ? 1 : 0);
         });
 
-        _that.setData!({
-          checkedTags: _that.data.checkedTags
-        });
-      }
-    } else {
-      if (_that.data.checkedTags.length >= 6) {
 
-        wx.showToast({
-          title: "无法选择更多标签：最多6个。",
-          icon: "none",
-          duration: 2000
+      });
+
+
+
+      // if (lang !== 'cn') $('[data-toggle="tooltip"]').tooltip();
+      //https://ak.graueneko.xyz/akhr.json
+
+
+      that.setData!({ possible: combs });
+
+    },
+    init() {
+      let _that = this;
+
+      //app.func.get('/akhr.json', {}, function (data: Hero[]) {
+      //let data: Hero[] = jsonData.dataList;
+      this.setData!({ optStars: ['清空', '6', '5', '4', '3', '2', '1'] });
+      // console.log(data);
+      this.setData!({ tags_aval: jsonData.aval })
+
+
+
+      // for (const key in data) {
+      //   if (data.hasOwnProperty(key)) {
+      //     const char = data[key];
+      //     if (char.hidden) continue;
+      //     char.tags!.push(char.type + "干员");
+      //     char.tags!.push(char.sex + "性干员");
+      //     let name = char.name;
+      //     char.tags!.forEach(function (tag: string) {
+      //       if (tag in _that.data.tags_aval) {
+
+      //         let tmp: { [key: string]: HeroBasic[] } = _that.data.tags_aval;
+      //         tmp[tag].push({
+      //           "name": name,
+      //           "img": char["name-en"],
+      //           "level": char.level,
+      //           "type": char.type
+      //         });
+
+      //         _that.setData!({ tags_aval: tmp })
+
+      //       } else {
+
+      //         let tmp: { [key: string]: HeroBasic[] } = _that.data.tags_aval;
+
+      //         tmp[tag] = [{
+      //           "name": name,
+      //           "img": char["name-en"],
+      //           "level": char.level,
+      //           "type": char.type
+      //         }];
+
+      //         _that.setData!({ tags_aval: tmp })
+
+      //       }
+
+      //     });
+
+      //   }
+      // }
+
+
+      _that.calc();
+      //});
+    },
+    clickTag(event: any) {
+      console.log(event);
+      let tag = event.target.dataset.title;
+      this.clickTagF(tag, true);
+    },
+    // 是否是点击进来的标志,true的时候才会去掉点击标志
+    clickTagF(tag: string, clickFlag: boolean) {
+      let _that = this;
+
+      let checked = false;
+
+      if (!clickFlag) {
+        this.data.tags.forEach((t: any) => {
+
+          t['cntags'].forEach((t2: any) => {
+            if (t2.name === tag && t2.showFlag === false) {
+              t2.showFlag = true;
+            }
+
+          })
         })
-
-        //alert("无法选择更多标签：最多6个。");
-        return;
       } else {
-        //@ts-ignore
-        _that.data.checkedTags.push(tag);
-        _that.setData!({
-          checkedTags: _that.data.checkedTags
-        });
+        this.data.tags.forEach((t: any) => {
 
+          t['cntags'].forEach((t2: any) => {
+            if (t2.name === tag) {
+              t2.showFlag = !t2.showFlag;
+            }
+
+          })
+        })
       }
+      //是否点过
+      //@ts-ignore
+      if ((_that.data.checkedTags).includes(tag)) {
+        checked = true;
+      }
+
+      if (checked) {
+        if (clickFlag) {
+          let tmp = _that.data.checkedTags;
+          tmp = _that.data.checkedTags.filter(function (v, _, __) {
+            return v !== tag;
+          });
+
+          _that.setData!({
+            checkedTags: tmp
+          });
+        }
+      } else {
+        if (_that.data.checkedTags.length >= 6) {
+
+          wx.showToast({
+            title: "无法选择更多标签：最多6个。",
+            icon: "none",
+            duration: 2000
+          })
+
+          //alert("无法选择更多标签：最多6个。");
+          return;
+        } else {
+          //@ts-ignore
+          _that.data.checkedTags.push(tag);
+          _that.setData!({
+            checkedTags: _that.data.checkedTags
+          });
+
+        }
+      }
+      _that.setData!({ tags: _that.data.tags });
+
+      //$(this).toggleClass("btn-primary btn-secondary");
+      _that.calc();
+
+
     }
-    _that.setData!({ tags: _that.data.tags });
-
-    //$(this).toggleClass("btn-primary btn-secondary");
-    _that.calc();
-
-
+  },
+  lifetimes: {
+    // 生命周期函数，可以为函数，或一个在methods段中定义的方法名
+    attached: function () {},
+    ready: function () {
+      this.init();
+    },
+    moved: function () { },
+    detached: function () { },
   }
-
 })
