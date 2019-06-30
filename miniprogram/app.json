@@ -5,7 +5,9 @@
     "pages/tags/tags",
     "pages/book/heroList",
     "pages/about/about/about",
-    "pages/about/logs/logs"
+    "pages/about/log/log",
+    "pages/change/change",
+    "pages/change/new/new"
   ],
   "window": {
     "navigationBarBackgroundColor": "#39b54a",

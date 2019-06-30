@@ -1,0 +1,18 @@
+<!--pages/change/list/list.wxml-->
+<cu-custom bgColor="bg-gradual-green">
+  <!-- isBack="{{true}}" -->
+  <!-- <view slot="backText">返回</view> -->
+  <view slot="content">线索交换</view>
+</cu-custom>
+<view class="bg-white padding">
+  
+<view class="" wx:for="{{changeList}}" wx:for-item="change">{{change.remark}} {{change.server}} {{change.username}} {{change.createdtime}} {{change.have}} {{change.need}}</view>
+  
+
+  <button class="cu-btn icon lg bg-green fixed-btn">
+  <navigator class="content" url="/pages/change/new/new" hover-class="none">
+        <text class="cuIcon-add"></text>
+      </navigator>
+  </button>
+
+</view>

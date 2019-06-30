@@ -21,7 +21,7 @@
   <button class="cu-btn  bg-grey" style="margin-right: 10px;" bindtap="clean">清空</button>
 </view>
 
-<view class="bg-white padding">
+<view class="bg-white padding" style="margin-top: 55px;padding-bottom: 0px;">
   <!-- <view class="flex flex-wrap">
  {{checkedTags}}
 </view> -->
@@ -78,15 +78,13 @@
   </view>
   <view class="cu-bar bg-white solid-bottom">
     <view class="action">
-      <text class="cuIcon-title text-green"></text><button open-type="share" class="share-btn" hover-class="none">觉得不错？点击分享给你的朋友吧</button>
+      <text class="cuIcon-title text-green"></text>
+      <button open-type="share" class="share-btn" hover-class="none">觉得不错？点击分享给你的朋友吧</button>
     </view>
   </view>
-<view class="padding-xs flex align-center">
-<view class="flex-sub text-left">
+  <view class="padding-xs flex align-center">
+    <view class="flex-sub text-left">
       <view class="text-df padding">对照游戏中的招募标签选择上面的标签</view>
     </view>
-
-
-
-</view>
+  </view>
 </view>

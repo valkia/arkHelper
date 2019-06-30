@@ -1,4 +1,5 @@
-var rootDocment = 'https://ak.graueneko.xyz';//你的域名  
+//var rootDocment = 'https://ak.graueneko.xyz';//你的域名  
+var rootDocment = 'http://127.0.0.1:8080/ark';//你的域名  
 function post(url, data, cb) {
   wx.request({
     url: rootDocment + url,

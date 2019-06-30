@@ -1,0 +1,7 @@
+/* pages/change/list/list.wxss */
+
+.fixed-btn {
+  position: fixed;
+  right: 20px;
+  bottom: 160rpx;
+}

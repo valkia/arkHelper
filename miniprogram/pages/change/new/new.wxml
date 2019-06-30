@@ -1,0 +1,61 @@
+<!--miniprogram/pages/change/new/new.wxml-->
+<cu-custom bgColor="bg-gradual-green" isBack="{{true}}"><view slot="backText">返回</view><view slot="content">发布信息</view></cu-custom>
+<view class="bg-white padding">
+  <view class="cu-bar bg-white solid-bottom">
+    <view class="action">
+      <text class="cuIcon-title text-green"></text>选择你需要的线索
+    </view>
+  </view>
+  <view class="padding-xs flex align-center">
+    <view class="flex-sub text-left">
+      <view class="flex flex-wrap">
+        <view class="tag-wrap">
+          <view class="flex flex-wrap">
+            <view class="tag-text cu-tag {{clue.showFlag?'bg-olive':'line-olive'}}" wx:for="{{clueList['need']}}" wx:for-item="clue" wx:for-index="idx" bindtap="clickClue" data-title='{{idx}}' data-type='need'>{{clue.name}}</view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="cu-bar bg-white solid-bottom">
+    <view class="action">
+      <text class="cuIcon-title text-green"></text>选择你用来交换的线索
+    </view>
+  </view>
+  <view class="padding-xs flex align-center">
+    <view class="flex-sub text-left">
+      <view class="flex flex-wrap">
+        <view class="tag-wrap">
+          <view class="flex flex-wrap">
+            <view class="tag-text cu-tag {{clue.showFlag?'bg-olive':'line-olive'}}" wx:for="{{clueList['have']}}" wx:for-item="clue" wx:for-index="idx" bindtap="clickClue" data-title='{{idx}}' data-type='have'>{{clue.name}}</view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <form>
+    <view class="cu-form-group margin-top">
+      <view class="title">游戏ID</view>
+      <input placeholder="游戏昵称#2333" value='{{id}}' bindinput="InputChange" data-type='id'></input>
+    </view>
+    <view class="cu-form-group">
+      <view class="title">游戏区服</view>
+      <picker bindchange="PickerChange" value="{{serverIndex}}" range="{{serverList}}">
+        <view class="picker">
+          {{serverIndex?serverList[serverIndex]:'请选择区服'}}
+        </view>
+      </picker>
+    </view>
+    <view class="cu-form-group">
+      <view class="title">备注</view>
+      <input placeholder="请输入备注（最多30个字）" maxlength="30" value='{{remark}}' bindinput="InputChange" data-type='remark'></input>
+    </view>
+
+    <view class="padding flex flex-direction">
+      <button class="cu-btn bg-green margin-tb-sm lg" bindtap="saveChange">提交</button>
+    </view>
+  </form>
+
+</view>
