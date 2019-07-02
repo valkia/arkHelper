@@ -21,9 +21,11 @@ Page({
         });
     },
     InputChange: function (e) {
-        console.log(e);
+        console.log(e.target.dataset.type);
         let type = e.target.dataset.type;
-      this.data[type] = e.detail.value;
+        this.setData({
+            type: e.detail.value
+        });
     },
     clickClue(e) {
         console.log(e);

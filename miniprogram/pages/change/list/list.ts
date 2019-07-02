@@ -6,7 +6,8 @@ Component({
     addGlobalClass: true,
   },
   data: {
-    changeList : []
+    changeList : [],
+    CustomBar: app.globalData.CustomBar,
 
   },
 

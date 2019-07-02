@@ -13,7 +13,7 @@ Component({
       "need": [{ name: "1", showFlag: false }, { name: "2", showFlag: false }, { name: "3", showFlag: false }, { name: "4", showFlag: false }, { name: "5", showFlag: false }, { name: "6", showFlag: false }, { name: "7", showFlag: false }],
       "have": [{ name: "1", showFlag: false }, { name: "2", showFlag: false }, { name: "3", showFlag: false }, { name: "4", showFlag: false }, { name: "5", showFlag: false }, { name: "6", showFlag: false }, { name: "7", showFlag: false }]
     },
-
+    
   },
 
 
