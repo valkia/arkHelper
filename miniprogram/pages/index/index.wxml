@@ -12,7 +12,7 @@
 
   <view class="action" bindtap="NavChange" data-cur="change">
     <view class='cuIcon-cu-image'>
-     <text class=" lg {{PageCur=='change'?'text-green cuIcon-homefill':'text-gray cuIcon-home'}}"></text>
+     <text class=" lg {{PageCur=='change'?'text-green cuIcon-formfill':'text-gray cuIcon-form'}}"></text>
     </view>
     <view class="{{PageCur=='change'?'text-green':'text-gray'}}">线索交换</view>
   </view>

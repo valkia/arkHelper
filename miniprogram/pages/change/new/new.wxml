@@ -54,8 +54,11 @@
     </view>
 
     <view class="padding flex flex-direction">
-      <button class="cu-btn bg-green margin-tb-sm lg" bindtap="saveChange">提交</button>
+      <button class="cu-btn bg-green margin-tb-sm lg" bindtap="saveChange" disabled="{{loading}}" >
+      <text class="cuIcon-loading2 iconfont-spin" wx:if="{{loading}}"></text> 提交</button>
     </view>
   </form>
 
 </view>
+<view class="cu-bar foot">
+<ad unit-id="adunit-84ba84af2ab9997c"></ad></view>

@@ -60,11 +60,48 @@ Page({
       PageCur: e.currentTarget.dataset.cur
     })
   },
-  onShareAppMessage() {
-    return {
-      title: '明日方舟-公开招募助手',
-      desc: '想知道你的公开招募会来什么干员？',
-      imageUrl: '../../images/scan.png',
+  onShareAppMessage(res: any) {
+    var that = this;
+    if (res.from == "button") {
+      if (res.target.dataset.id === '1') {
+        return {
+          title: '明日方舟助手-公开招募助手',
+          desc: '想知道你的公开招募会来什么干员？',
+          imageUrl: '../../images/scan.png'
+        }
+
+      }
+      else if (res.target.dataset.id === '2') {
+        var value = wx.getStorageSync('changeClue')
+        if (!value) {
+          value = "快来找到你需要的线索~"
+        }
+        return {
+          title: '明日方舟助手-线索交换',
+          desc: value,
+          imageUrl: '../../images/scan.png'
+         
+        }
+      }
+      else {
+        return {
+          title: '明日方舟助手-公开招募助手',
+          desc: '想知道你的公开招募会来什么干员？',
+          imageUrl: '../../images/scan.png'
+        }
+      }
     }
+
+    //默认
+    else {
+      return {
+        title: '明日方舟-公开招募助手',
+        desc: '想知道你的公开招募会来什么干员？',
+        imageUrl: '../../images/scan.png',
+      }
+
+    }
+
+
   },
 })
