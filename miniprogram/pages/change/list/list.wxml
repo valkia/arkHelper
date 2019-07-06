@@ -14,7 +14,7 @@
 </view>
 
 
-  <button class="cu-btn icon lg bg-green fixed-btn" style="bottom: 260rpx;" url="/pages/change/new/new" hover-class="none" open-type="share"  data-id="2" data-value="3换2">
+  <button class="cu-btn icon lg bg-green fixed-btn" style="bottom: 260rpx;"  hover-class="none" open-type="share"  data-id="2" >
     <text class="cuIcon-share"></text>
   </button>
 

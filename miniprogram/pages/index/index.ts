@@ -83,6 +83,19 @@ Page({
          
         }
       }
+      else if (res.target.dataset.id === '2') {
+        var value = wx.getStorageSync('changeClue')
+        if (!value) {
+          value = "快来找到你需要的线索~"
+        }
+        return {
+          title: '明日方舟助手-线索交换',
+          desc: value,
+          imageUrl: '../../images/ark66.jpg'
+
+        }
+      }
+      
       else {
         return {
           title: '明日方舟助手-公开招募助手',

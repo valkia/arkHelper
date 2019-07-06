@@ -13,12 +13,23 @@ Page({
       "have": [{ name: "1", showFlag: false }, { name: "2", showFlag: false }, { name: "3", showFlag: false }, { name: "4", showFlag: false }, { name: "5", showFlag: false }, { name: "6", showFlag: false }, { name: "7", showFlag: false }]
     },
     remark: "",
-    loading: false
+    loading: false,
+    modalShow: false
   },
 
 
-
-
+  onShareAppMessage() {
+    console.log("onShareAppMessage");
+    var value = wx.getStorageSync('changeClue')
+    if (!value) {
+      value = "快来找到你需要的线索~"
+    }
+    return {
+      title: '明日方舟助手-线索交换',
+      desc: value,
+      imageUrl: '../../../images/ark66.jpg'
+    }
+  },
   PickerChange(e: any) {
 
     console.log(e);
@@ -45,6 +56,11 @@ Page({
 
   },
 
+  hideModal: function () {
+    wx.navigateBack({     //返回上一页面或多级页面
+      delta: 1
+    })
+  },
 
 
   clickClue(e: any) {
@@ -126,17 +142,11 @@ Page({
           key: "changeClue",
           data: changeClueStr
         })
+
         that.setData!({
-          loading: false
+          loading: false, modalShow: true
         });
-        wx.showToast({
-          title: "发布成功",
-          icon: "none",
-          duration: 2000
-        })
-        wx.navigateBack({     //返回上一页面或多级页面
-          delta: 1
-        })
+
       }
     })
   }
