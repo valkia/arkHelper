@@ -4,7 +4,6 @@
     "tags":"../tags/tags",
     "heroList": "../book/heroList",
     "about": "../about/about/about",
-    "change":"../change/change",
     "changeList": "../change/list/list"
   }
 }

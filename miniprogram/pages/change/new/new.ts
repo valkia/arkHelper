@@ -1,10 +1,11 @@
 // pages/change/new/new.js
 var app = getApp()
+//@ts-ignore
 import ArkResp = require('../../model/ArkResp.js');
 Page({
   data: {
     id: "",
-    server: null,
+    server: "",
     serverIndex: null,
     serverList: ['官服', 'B服', '其他'],
     clueList: {
@@ -50,10 +51,9 @@ Page({
     console.log(e);
     let type = e.target.dataset.type;
     let clue = e.target.dataset.title;
-
+    //@ts-ignore
     let clueTmp = this.data.clueList[type][clue];
     clueTmp.showFlag = !clueTmp.showFlag;
-    let clueString = "clueList['" + type + "'][" + clue + "]";
     this.setData!({
       clueList: this.data.clueList
     });

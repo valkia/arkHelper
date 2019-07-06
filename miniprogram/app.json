@@ -6,7 +6,7 @@
     "pages/book/heroList",
     "pages/about/about/about",
     "pages/about/log/log",
-    "pages/change/change",
+    "pages/change/list/list",
     "pages/change/new/new"
   ],
   "window": {

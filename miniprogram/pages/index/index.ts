@@ -61,13 +61,13 @@ Page({
     })
   },
   onShareAppMessage(res: any) {
-    var that = this;
+    
     if (res.from == "button") {
       if (res.target.dataset.id === '1') {
         return {
           title: '明日方舟助手-公开招募助手',
           desc: '想知道你的公开招募会来什么干员？',
-          imageUrl: '../../images/scan.png'
+          imageUrl: '../../images/ark11.png'
         }
 
       }
@@ -79,7 +79,7 @@ Page({
         return {
           title: '明日方舟助手-线索交换',
           desc: value,
-          imageUrl: '../../images/scan.png'
+          imageUrl: '../../images/ark66.jpg'
          
         }
       }
@@ -87,7 +87,7 @@ Page({
         return {
           title: '明日方舟助手-公开招募助手',
           desc: '想知道你的公开招募会来什么干员？',
-          imageUrl: '../../images/scan.png'
+          imageUrl: '../../images/ark11.png'
         }
       }
     }
@@ -97,7 +97,7 @@ Page({
       return {
         title: '明日方舟-公开招募助手',
         desc: '想知道你的公开招募会来什么干员？',
-        imageUrl: '../../images/scan.png',
+        imageUrl: '../../images/ark11.jpg',
       }
 
     }

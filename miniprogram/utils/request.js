@@ -1,5 +1,38 @@
-//var rootDocment = 'https://ak.graueneko.xyz';//你的域名  
-var rootDocment = 'http://127.0.0.1:8080/ark';//你的域名  
+var rootDocment = 'https://dtodo.cn/ark';//正式域名
+//var rootDocment = 'http://127.0.0.1:8080/ark';//本地开发
+
+
+function success(res, cb){
+  if (res.statusCode === 404) {
+    wx.showToast({
+      title: "系统升级中，请稍等",
+      icon: "none",
+      duration: 2000
+    })
+    return;
+  }
+  else if (res.statusCode === 200) {
+  return typeof cb == "function" && cb(res.data)
+  }
+  else{
+    wx.showToast({
+      title: "系统出错啦，请联系管理员",
+      icon: "none",
+      duration: 2000
+    })
+    return;
+  }
+}
+
+function fail(cb) {
+  wx.showToast({
+    title: "请检查网络",
+    icon: "none",
+    duration: 2000
+  })
+  return typeof cb == "function" && cb(false)
+}
+
 function post(url, data, cb) {
   wx.request({
     url: rootDocment + url,
@@ -7,10 +40,10 @@ function post(url, data, cb) {
     method: 'post',
     header: { 'Content-Type': 'application/json' },
     success: function (res) {
-      return typeof cb == "function" && cb(res.data)
+      return success(res, cb);
     },
     fail: function () {
-      return typeof cb == "function" && cb(false)
+      return fail(cb);
     }
   })
 }
@@ -22,10 +55,10 @@ function get(url, data, cb) {
     method: 'get',
     header: { 'Content-Type': 'application/json' },
     success: function (res) {
-      return typeof cb == "function" && cb(res.data)
+      return success(res, cb);
     },
     fail: function () {
-      return typeof cb == "function" && cb(false)
+      return fail(cb);
     }
   })
 }
