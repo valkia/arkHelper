@@ -26,13 +26,9 @@ Component({
 
           let list = JSON.parse(response.data);
           list.forEach((item:any)=>{
-            
-            //var str = 1404172800000;
-            
             if (item.createdtime.slice(0, 10) === new Date().toISOString().slice(0, 10)) {
               item.createdtime = "今天";
-            } else (item.createdtime < new Date()) {
-              //之前
+            } else {
               item.createdtime = item.createdtime.slice(0, 10);//2014-07-01
             }
           })
