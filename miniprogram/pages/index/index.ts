@@ -65,7 +65,7 @@ Page({
     if (res.from == "button") {
       if (res.target.dataset.id === '1') {
         return {
-          title: '明日方舟助手-公开招募助手',
+          title: '公开招募查询',
           desc: '想知道你的公开招募会来什么干员？',
           imageUrl: '../../images/ark11.png'
         }
@@ -77,19 +77,7 @@ Page({
           value = "快来找到你需要的线索~"
         }
         return {
-          title: '明日方舟助手-线索交换',
-          desc: value,
-          imageUrl: '../../images/ark66.jpg'
-         
-        }
-      }
-      else if (res.target.dataset.id === '2') {
-        var value = wx.getStorageSync('changeClue')
-        if (!value) {
-          value = "快来找到你需要的线索~"
-        }
-        return {
-          title: '明日方舟助手-线索交换',
+          title: value,
           desc: value,
           imageUrl: '../../images/ark66.jpg'
 
@@ -98,7 +86,7 @@ Page({
       
       else {
         return {
-          title: '明日方舟助手-公开招募助手',
+          title: '公开招募查询',
           desc: '想知道你的公开招募会来什么干员？',
           imageUrl: '../../images/ark11.png'
         }
@@ -108,7 +96,7 @@ Page({
     //默认
     else {
       return {
-        title: '明日方舟-公开招募助手',
+        title: '公开招募查询',
         desc: '想知道你的公开招募会来什么干员？',
         imageUrl: '../../images/ark11.jpg',
       }

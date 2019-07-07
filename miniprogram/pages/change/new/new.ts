@@ -25,7 +25,7 @@ Page({
       value = "快来找到你需要的线索~"
     }
     return {
-      title: '明日方舟助手-线索交换',
+      title: value,
       desc: value,
       imageUrl: '../../../images/ark66.jpg'
     }
@@ -130,7 +130,7 @@ Page({
     }
     let req = { id: this.data.id, server: this.data.server, remark: this.data.remark, clueList: this.data.clueList }
     let that = this;
-    let changeClueStr = this.data.id + " " + this.data.server + " " + haveStr + " 换 " + needStr;
+    let changeClueStr = this.data.id + " " + this.data.server + " " + haveStr + "换 " + needStr;
     that.setData!({
       loading: true
     });

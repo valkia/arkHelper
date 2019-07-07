@@ -23,7 +23,22 @@ Component({
       let that = this;
       app.func.post('/changeList', { pageIndex: this.data.pageIndex, pageSize: this.data.pageSize, keyword: this.data.keyword  }, function (response: ArkResp) {
         if (response.status === 200) {
-          that.setData!({ changeList: JSON.parse(response.data) });
+
+          let list = JSON.parse(response.data);
+          list.forEach((item:any)=>{
+            
+            //var str = 1404172800000;
+            
+            if (item.createdtime.slice(0, 10) === new Date().toISOString().slice(0, 10)) {
+              item.createdtime = "今天";
+            } else (item.createdtime < new Date()) {
+              //之前
+              item.createdtime = item.createdtime.slice(0, 10);//2014-07-01
+            }
+          })
+          
+
+          that.setData!({ changeList: list });
           wx.pageScrollTo({
             scrollTop: 0,
             duration: 150
