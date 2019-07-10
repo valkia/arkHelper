@@ -19,13 +19,15 @@
     <input type="text" value="{{keywords}}" placeholder="男 医疗 治疗 （空格隔开，支持模糊搜索）" confirm-type="search" bindinput="search"></input>
   </view>
   <button class="cu-btn  bg-grey" style="margin-right: 10px;" bindtap="clean">清空</button>
+  <button class="cu-btn  bg-grey" style="margin-right: 10px;" bindtap="upload">上传</button>
 </view>
 
-<view class="bg-white padding" style="margin-top: 55px;padding-bottom: 0px;">
+<view class="bg-white" style="margin-top: 55px;padding: 0px;">
   <!-- <view class="flex flex-wrap">
  {{checkedTags}}
 </view> -->
-  <view class="flex flex-wrap">
+  <view style="padding:8px;" class="bg-red">新增识图功能，点击右边上传按钮上传游戏中的公开招募界面截图即可</view>
+  <view class="flex flex-wrap" style="padding:5px 5px 0 5px">
     <view wx:for="{{showStars}}" wx:for-item="item" bindtap="clickStars" data-title='{{item.name}}' class="tag-number cu-tag {{item.showFlag?'bg-olive':'line-olive'}}">{{item.name}}</view>
   </view>
 </view>
@@ -82,7 +84,10 @@
       <button open-type="share" class="share-btn" hover-class="none">觉得不错？点击分享给你的朋友吧</button>
     </view>
   </view>
-  <view class="padding-xs flex align-center">
+  <view class="ad-bottom">
+    <ad unit-id="adunit-84ba84af2ab9997c"></ad>
+  </view>
+  <view class="padding-sm flex align-center">
     <view class="flex-sub text-left">
       <view class="text-df padding">对照游戏中的招募标签选择上面的标签</view>
     </view>

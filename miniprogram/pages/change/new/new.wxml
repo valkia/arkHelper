@@ -1,5 +1,8 @@
 <!--miniprogram/pages/change/new/new.wxml-->
-<cu-custom bgColor="bg-gradual-green" isBack="{{true}}"><view slot="backText">返回</view><view slot="content">发布信息</view></cu-custom>
+<cu-custom bgColor="bg-gradual-green" isBack="{{true}}">
+  <view slot="backText">返回</view>
+  <view slot="content">发布信息</view>
+</cu-custom>
 <view class="bg-white padding">
   <view class="cu-bar bg-white solid-bottom">
     <view class="action">
@@ -54,14 +57,15 @@
     </view>
 
     <view class="padding flex flex-direction">
-      <button class="cu-btn bg-green margin-tb-sm lg" bindtap="saveChange" disabled="{{loading}}" >
-      <text class="cuIcon-loading2 iconfont-spin" wx:if="{{loading}}"></text> 提交</button>
+      <button class="cu-btn bg-green margin-tb-sm lg" bindtap="saveChange" disabled="{{loading}}">
+        <text class="cuIcon-loading2 iconfont-spin" wx:if="{{loading}}"></text> 提交</button>
     </view>
   </form>
 
 </view>
-<view class="cu-bar foot">
-<ad unit-id="adunit-84ba84af2ab9997c"></ad></view>
+<view class="ad-bottom-fixed">
+  <ad unit-id="adunit-84ba84af2ab9997c"></ad>
+</view>
 
 <view class="cu-modal {{modalShow?'show':''}}">
   <view class="cu-dialog">

@@ -106,3 +106,19 @@
 .text-light {
   font-weight: 300;
 }
+
+.ad-bottom-fixed {
+  /*34px是适配iphonex */
+   bottom: 34px;
+position: fixed;
+width: 90%;
+margin-left: 5%;
+
+}
+
+.ad-bottom {
+
+width: 90%;
+margin-left: 5%;
+
+}

@@ -27,6 +27,7 @@ Page({
     return {
       title: value,
       desc: value,
+      path: 'pages/index/index',
       imageUrl: '../../../images/ark66.jpg'
     }
   },

@@ -3,7 +3,7 @@
   <view class="UCenter-bg">
     <image src="../../../images/rabbit.png" class="png" mode="widthFix"></image>
     <view class="text-xl">明日方舟助手
-      <text class="text-df">v1.2.0</text>
+      <text class="text-df">v1.2.1</text>
     </view>
     <image src="https://image.weilanwl.com/gif/wave.gif" mode="scaleToFill" class="gif-wave"></image>
   </view>

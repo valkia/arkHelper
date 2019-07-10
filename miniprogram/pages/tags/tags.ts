@@ -84,9 +84,68 @@ Component({
 
   methods: {
 
-    onLoad(){
+    onLoad() {
       console.log("onload333");
       this.init();
+    },
+
+    upload() {
+      this.clean()
+      let that = this;
+      wx.chooseImage({
+        count: 1,
+        sizeType: ['original', 'compressed'],
+        sourceType: ['album', 'camera'],
+        success(res) {
+          // tempFilePath可以作为img标签的src属性显示图片
+          const tempFilePaths = res.tempFilePaths
+          wx.compressImage({
+            src: tempFilePaths[0], // 图片路径
+            quality: 80, // 压缩质量,
+            success(res) {
+              const tempFilePath = res.tempFilePath
+
+              wx.showLoading({
+                title: '加载中',
+              })
+
+              wx.uploadFile({
+                url: 'https://dtodo.cn/ark/upload2', //仅为示例，非真实的接口地址
+                filePath: tempFilePath,
+                name: 'file',
+                formData: {
+                  'user': 'test'
+                },
+                success(res) {
+                  console.log(res)
+                  wx.hideLoading()
+                  if (res.data!='[]'){
+                    let tagList = JSON.parse(res.data)
+                    
+                    for (let i = 0; i < tagList.length;i++){
+                      that.clickTagF(tagList[i], true);
+                    }
+                  }else{
+                    wx.showToast({
+                      title: "没有识别的招募标签，请检查图片。",
+                      icon: "none",
+                      duration: 2000
+                    })
+                  }
+                  
+                  //do something
+                },
+                fail(res){
+                  console.log(res)
+                  wx.hideLoading()
+                }
+              })
+            }
+          })
+        }
+      })
+
+
     },
 
     search(e: any) {
@@ -449,7 +508,7 @@ Component({
   },
   lifetimes: {
     // 生命周期函数，可以为函数，或一个在methods段中定义的方法名
-    attached: function () {},
+    attached: function () { },
     ready: function () {
       this.init();
     },
