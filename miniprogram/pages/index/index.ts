@@ -65,8 +65,8 @@ Page({
     if (res.from == "button") {
       if (res.target.dataset.id === '1') {
         return {
-          title: '公开招募查询',
-          desc: '想知道你的公开招募会来什么干员？',
+          title: '支持识别截图的公开招募助手',
+          desc: '支持识别截图的公开招募助手',
           imageUrl: '../../images/ark11.png'
         }
 
@@ -86,8 +86,8 @@ Page({
       
       else {
         return {
-          title: '公开招募查询',
-          desc: '想知道你的公开招募会来什么干员？',
+          title: '支持识别截图的公开招募助手',
+          desc: '支持识别截图的公开招募助手',
           imageUrl: '../../images/ark11.png'
         }
       }
@@ -96,8 +96,8 @@ Page({
     //默认
     else {
       return {
-        title: '公开招募查询',
-        desc: '想知道你的公开招募会来什么干员？',
+        title: '支持识别截图的公开招募助手',
+        desc: '支持识别截图的公开招募助手',
         imageUrl: '../../images/ark11.jpg',
       }
 

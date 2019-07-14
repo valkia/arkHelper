@@ -16,7 +16,7 @@
 <view class="cu-bar bg-white search fixed" style="top:{{CustomBar}}px">
   <view class="search-form ">
     <text class="cuIcon-search"></text>
-    <input type="text" value="{{keywords}}" placeholder="男 医疗 治疗 （空格隔开，支持模糊搜索）" confirm-type="search" bindinput="search"></input>
+    <input type="text" value="{{keywords}}" placeholder="关键字（空格隔开，支持模糊搜索）" confirm-type="search" bindinput="search"></input>
   </view>
   <button class="cu-btn  bg-grey" style="margin-right: 10px;" bindtap="clean">清空</button>
   <button class="cu-btn  bg-grey" style="margin-right: 10px;" bindtap="upload">上传</button>
