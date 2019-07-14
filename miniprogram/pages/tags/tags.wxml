@@ -26,7 +26,7 @@
   <!-- <view class="flex flex-wrap">
  {{checkedTags}}
 </view> -->
-  <view style="padding:8px;" class="bg-red">新增识图功能，点击右边上传按钮上传游戏中的公开招募界面截图即可</view>
+  <view style="padding:8px;color:#ff0000;background:#ffffe9" class="solid-bottom">新增识图功能，点击右边上传按钮上传游戏中的公开招募界面截图即可</view>
   <view class="flex flex-wrap" style="padding:5px 5px 0 5px">
     <view wx:for="{{showStars}}" wx:for-item="item" bindtap="clickStars" data-title='{{item.name}}' class="tag-number cu-tag {{item.showFlag?'bg-olive':'line-olive'}}">{{item.name}}</view>
   </view>
