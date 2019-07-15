@@ -21,15 +21,9 @@ App<IMyApp>({
 
     wx.getSystemInfo({
       success: e => {
-        let statusBarHeight = 68//安卓
-        if (e.model.indexOf('iPhone X') !== -1) {
-          statusBarHeight = 88//iphone x
-        } else if (e.model.indexOf('iPhone') !== -1) {
-          statusBarHeight = 64 //iphone
-        }
         console.log(e.statusBarHeight);
         this.globalData.StatusBar = e.statusBarHeight;
-        this.globalData.CustomBar = statusBarHeight;
+        this.globalData.CustomBar = e.statusBarHeight+ 46;
         
         
 
