@@ -47,6 +47,7 @@ Page({
   //   }
   // },
 
+  
   getUserInfo(e: any) {
     console.log(e)
     app.globalData.userInfo = e.detail.userInfo
