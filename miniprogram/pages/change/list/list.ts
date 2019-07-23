@@ -24,14 +24,14 @@ Component({
       app.func.post('/changeList', { pageIndex: this.data.pageIndex, pageSize: this.data.pageSize, keyword: this.data.keyword  }, function (response: ArkResp) {
         if (response.status === 200) {
 
-          let list = JSON.parse(response.data);
-          list.forEach((item:any)=>{
-            if (item.createdtime.slice(0, 10) === new Date().toISOString().slice(0, 10)) {
-              item.createdtime = "今天";
-            } else {
-              item.createdtime = item.createdtime.slice(0, 10);//2014-07-01
-            }
-          })
+          let list = response.data;
+          // list.forEach((item:any)=>{
+          //   if (item.createdtime.slice(0, 10) === new Date().toISOString().slice(0, 10)) {
+          //     item.createdtime = "今天";
+          //   } else {
+          //     item.createdtime = item.createdtime.slice(0, 10);//2014-07-01
+          //   }
+          // })
           
 
           that.setData!({ changeList: list });
