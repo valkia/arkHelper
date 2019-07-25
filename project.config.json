@@ -5,11 +5,11 @@
 	},
 	"miniprogramRoot": "miniprogram/",
 	"compileType": "miniprogram",
-	"libVersion": "2.7.1",
+	"libVersion": "2.6.6",
 	"projectname": "arknightHelper",
 	"scripts": {
 		"beforeCompile": "npm run tsc",
-		"beforePreview": "npm run tsc",
+		"beforePreview": "",
 		"beforeUpload": "npm run tsc"
 	},
 	"setting": {

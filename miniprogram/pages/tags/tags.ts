@@ -1,7 +1,5 @@
 //tags.js
 var app = getApp()
-//@ts-ignore
-import jsonData = require('/data.js');
 
 class HeroBasic {
   name?: string;
@@ -119,23 +117,23 @@ Component({
                 success(res) {
                   console.log(res)
                   wx.hideLoading()
-                  if (res.data!='[]'){
+                  if (res.data != '[]') {
                     let tagList = JSON.parse(res.data)
-                    
-                    for (let i = 0; i < tagList.length;i++){
+
+                    for (let i = 0; i < tagList.length; i++) {
                       that.clickTagF(tagList[i], true);
                     }
-                  }else{
+                  } else {
                     wx.showToast({
                       title: "没有识别的招募标签，请检查图片。",
                       icon: "none",
                       duration: 2000
                     })
                   }
-                  
+
                   //do something
                 },
-                fail(res){
+                fail(res) {
                   console.log(res)
                   wx.hideLoading()
                 }
@@ -381,7 +379,16 @@ Component({
       //let data: Hero[] = jsonData.dataList;
       this.setData!({ optStars: ['清空', '6', '5', '4', '3', '2', '1'] });
       // console.log(data);
-      this.setData!({ tags_aval: jsonData.aval })
+      var that = this;
+      app.func.get('/tagsAval', {}, function (response: ArkResp) {
+        if (response.status === 200) {
+          console.log(response.data)
+          //
+          that.setData!({ tags_aval: JSON.parse(response.data) })
+        }
+      })
+
+
 
 
 

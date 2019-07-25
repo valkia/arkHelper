@@ -1,6 +1,6 @@
-var rootDocment = 'https://dtodo.cn/ark';//正式域名
+var rootDocment = 'https://ark.dtodo.cn:8080/ark';//正式域名
 //var rootDocment = 'http://127.0.0.1:8080/ark';//本地开发
-var rootDocment = 'http://176.122.161.8:8080/ark';//正式域名
+//var rootDocment = 'http://176.122.161.8:8080/ark';//正式域名
 
 function success(res, cb){
   if (res.statusCode === 404) {
@@ -26,7 +26,7 @@ function success(res, cb){
 
 function fail(cb) {
   wx.showToast({
-    title: "请检查网络",
+    title: "请检查网络或服务器升级中",
     icon: "none",
     duration: 2000
   })

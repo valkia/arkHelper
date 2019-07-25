@@ -34,14 +34,14 @@
       <view class="content">
         <view class="bg-grey padding-sm radius margin-top-xs  text-sm">
           <view class="flex">
-            <view> {{change.have}} 换 {{change.need}} </view>
+            <view> {{change.Have}} 换 {{change.Need}} </view>
           </view>
         </view>
         <view class="margin-top-xs text-gray text-content text-df">
-          {{change.remark}}
+          {{change.Remark}}
         </view>
         <view class="margin-top-xs margin-bottom-xs flex justify-end text-right">
-          <view class="text-gray text-df ">{{change.username}} {{change.server}} {{change.createdtime}}</view>
+          <view class="text-gray text-df ">{{change.Username}} {{change.Server}} {{change.createdtime}}</view>
         </view>
       </view>
 
