@@ -26,7 +26,7 @@
 </button>
 
 <view class="cu-item shadow" style="margin-top:55px;margin-bottom: 60px;">
-
+ <view style="padding:8px;color:#ff0000;background:#ffffe9" class="solid-bottom">现在点击昵称就能直接复制啦~</view>
   <view class="cu-list cu-card menu comment solids-top">
 
     <view class="cu-item" wx:for="{{changeList}}" wx:for-item="change">
@@ -41,7 +41,7 @@
           {{change.Remark}}
         </view>
         <view class="margin-top-xs margin-bottom-xs flex justify-end text-right">
-          <view class="text-gray text-df ">{{change.Username}} {{change.Server}} {{change.createdtime}}</view>
+          <view class="text-gray text-df "><view bindtap="copyBtn" data-name="{{change.Username}}" style="color:#666">{{change.Username}}</view> {{change.Server}} {{change.createdtime}}</view>
         </view>
       </view>
 
