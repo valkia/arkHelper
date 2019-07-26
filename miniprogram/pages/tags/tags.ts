@@ -377,7 +377,7 @@ Component({
 
 
 
-
+this.setData!({ optStars: ['清空', '6', '5', '4', '3', '2', '1'] }); 
 
       // for (const key in data) {
       //   if (data.hasOwnProperty(key)) {
