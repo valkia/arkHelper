@@ -7,6 +7,20 @@
   <view class="cu-item text-green">
     <view class="bg-gradual-green content shadow">
       <view class="cu-capsule radius">
+        <view class="cu-tag bg-white text-green">v1.2.2</view>
+        <view class="cu-tag line-white">2019/07/26</view>
+      </view>
+      <view class="margin-top-sm text-content">
+        <view>1.优化了小程序性能</view>
+        <view>2.好友名称可以复制了</view>
+        <view>3.更换了后台，现在性能和网络更强悍啦~</view>
+      </view>
+    </view>
+  </view>
+
+  <view class="cu-item text-green">
+    <view class="bg-green content shadow">
+      <view class="cu-capsule radius">
         <view class="cu-tag bg-white text-green">v1.2.1</view>
         <view class="cu-tag line-white">2019/07/10</view>
       </view>

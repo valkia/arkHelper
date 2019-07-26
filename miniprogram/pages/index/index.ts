@@ -72,6 +72,13 @@ Page({
         }
 
       }
+      else if (res.target.dataset.id === '3') {
+        return {
+          title: '支持识别截图的公开招募助手2',
+          desc: '支持识别截图的公开招募助手2'
+        }
+
+      }
       else if (res.target.dataset.id === '2') {
         var value = wx.getStorageSync('changeClue')
         if (!value) {

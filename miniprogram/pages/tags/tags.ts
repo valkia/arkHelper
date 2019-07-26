@@ -1,6 +1,7 @@
 //tags.js
 var app = getApp()
-
+//@ts-ignore
+import ArkResp = require('../../model/ArkResp.js');
 class HeroBasic {
   name?: string;
   type?: string;
@@ -83,7 +84,6 @@ Component({
   methods: {
 
     onLoad() {
-      console.log("onload333");
       this.init();
     },
 
@@ -115,7 +115,6 @@ Component({
                   'user': 'test'
                 },
                 success(res) {
-                  console.log(res)
                   wx.hideLoading()
                   if (res.data != '[]') {
                     let tagList = JSON.parse(res.data)
@@ -184,7 +183,6 @@ Component({
           })
         })
         if (times === 1) {
-          console.log(result);
           that.clickTagF(result, false);
         }
 
@@ -209,7 +207,6 @@ Component({
     },
 
     clickStars(event: any) {
-      console.log(event);
       let value = event.target.dataset.title;
       if (value === '清空') {
         this.data.showStars.forEach((s: any) => {
@@ -280,13 +277,11 @@ Component({
           "possible": []
         });
       }
-      // console.log(combs);
       let optStars: string[] = this.data.optStars;
       // $(".btn-opt").each(function (_, __) {
       //   if ($(this).attr("opt-id") === "all" || $(this).hasClass("btn-secondary")) return;
       //   optStars.push($(this).attr("opt-id"));
       // });
-      //console.log(optStars);
       //$("#tbody-recommend").html("");
       var that = this;//把this对象复制到临时变量that
       combs.forEach((comb: { [key: string]: any }) => {
@@ -298,8 +293,6 @@ Component({
           let reduced_chars: HeroBasic[] = [];
 
           chars.forEach((char: HeroBasic) => {
-            // console.log(tags_aval[tags[i]]);
-            // console.log(char);
             //@ts-ignore 
             let tmp: HeroBasic[] = that.data.tags_aval[tags[i]];
             //@ts-ignore 
@@ -317,7 +310,6 @@ Component({
         if (chars.length === 0) return;
         //@ts-ignore 
         if (!tags.includes("高级资深干员")) {
-          // console.log(tags.join(",") + " 不含(高级)资深干员");
           let reduce6: any[] = [];
           chars.forEach(function (char: any) {
             if (char.level !== 6) {
@@ -328,7 +320,6 @@ Component({
         }
         let filtered_chars: HeroBasic[] = [];
         chars.forEach(function (char: HeroBasic) {
-          //console.log(char.level);
           //@ts-ignore 
           if (optStars.includes(char.level.toString())) {
             filtered_chars.push(char);
@@ -377,13 +368,9 @@ Component({
 
       //app.func.get('/akhr.json', {}, function (data: Hero[]) {
       //let data: Hero[] = jsonData.dataList;
-      this.setData!({ optStars: ['清空', '6', '5', '4', '3', '2', '1'] });
-      // console.log(data);
       var that = this;
       app.func.get('/tagsAval', {}, function (response: ArkResp) {
         if (response.status === 200) {
-          console.log(response.data)
-          //
           that.setData!({ tags_aval: JSON.parse(response.data) })
         }
       })
@@ -437,7 +424,6 @@ Component({
       //});
     },
     clickTag(event: any) {
-      console.log(event);
       let tag = event.target.dataset.title;
       this.clickTagF(tag, true);
     },

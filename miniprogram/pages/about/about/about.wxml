@@ -3,13 +3,13 @@
   <view class="UCenter-bg">
     <image src="../../../images/rabbit.png" class="png" mode="widthFix"></image>
     <view class="text-xl">明日方舟助手
-      <text class="text-df">v1.2.1</text>
+      <text class="text-df">v1.2.2</text>
     </view>
     <image src="https://image.weilanwl.com/gif/wave.gif" mode="scaleToFill" class="gif-wave"></image>
   </view>
   <view class="cu-list menu card-menu margin-top-xl margin-bottom-xl shadow-lg radius">
     <view class="cu-item arrow">
-      <button class="cu-btn content" open-type="share" hover-class="none" data-id="1">
+      <button class="cu-btn content" open-type="share" hover-class="none" data-id="3">
         <text class="cuIcon-share text-yellow"></text>
         <text class="text-grey">分享</text>
       </button>
