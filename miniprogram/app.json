@@ -3,7 +3,7 @@
     "pages/index/index",
     "pages/logs/logs",
     "pages/tags/tags",
-    "pages/book/heroList",
+    "pages/calc/levelCalc",
     "pages/about/about/about",
     "pages/about/log/log",
     "pages/change/list/list",

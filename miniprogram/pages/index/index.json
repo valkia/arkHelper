@@ -2,8 +2,8 @@
   "component": true,
   "usingComponents": {
     "tags":"../tags/tags",
-    "heroList": "../book/heroList",
     "about": "../about/about/about",
+    "levelCalc":"../calc/levelCalc",
     "changeList": "../change/list/list"
   }
 }
