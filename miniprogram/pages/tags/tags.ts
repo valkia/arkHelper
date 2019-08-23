@@ -90,6 +90,7 @@ Component({
     upload() {
       this.clean()
       let that = this;
+      console.log("upload start");
       wx.chooseImage({
         count: 1,
         sizeType: ['original', 'compressed'],
@@ -97,9 +98,10 @@ Component({
         success(res) {
           // tempFilePath可以作为img标签的src属性显示图片
           const tempFilePaths = res.tempFilePaths
+          console.log(tempFilePaths);
           wx.compressImage({
             src: tempFilePaths[0], // 图片路径
-            quality: 80, // 压缩质量,
+            quality: 50, // 压缩质量,
             success(res) {
               const tempFilePath = res.tempFilePath
 
@@ -108,7 +110,7 @@ Component({
               })
 
               wx.uploadFile({
-                url: 'https://dtodo.cn/ark/upload2', //仅为示例，非真实的接口地址
+                url: 'https://ark.dtodo.cn/upload', //仅为示例，非真实的接口地址
                 filePath: tempFilePath,
                 name: 'file',
                 formData: {
