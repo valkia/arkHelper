@@ -1,4 +1,4 @@
-export class MaterialItemData {
+ class MaterialItemData {
     have = 0;
     need = 0;
     lack = 0;
@@ -12,3 +12,5 @@ export class MaterialItemData {
         return !(this.have || this.need || this.lack);
     }
 }
+
+export = MaterialItemData

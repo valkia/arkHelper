@@ -1,4 +1,6 @@
 export class HrTagRow {
-    title: string;
-    tags: Array<string>;
+    title: string = "";
+    tags: Array<string> = [];
 }
+
+export = HrTagRow

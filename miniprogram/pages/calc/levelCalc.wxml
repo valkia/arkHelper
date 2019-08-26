@@ -4,4 +4,24 @@
   <!-- <view slot="backText">返回</view> -->
   <view slot="content">明日方舟助手</view>
 </cu-custom>
-<text>pages/calc/levelCalc.wxml</text>
+<button class="cu-btn  bg-grey" style="margin-right: 10px;" bindtap="clean">重置</button>
+<button class="cu-btn  bg-grey" style="margin-right: 10px;" bindtap="clean">规划</button>
+过滤
+<switch class="gradual-green radius sm" checked="{{options.filtered}}"></switch>
+高级材料
+<switch class="gradual-green radius sm" checked="{{options.showOnly3plus}}"></switch>
+精英材料
+<switch class="gradual-green radius sm" checked="{{options.showMat}}"></switch>
+技能书
+<switch class="gradual-green radius sm" checked="{{options.showBook}}"></switch>
+芯片
+<switch class="gradual-green radius sm" checked="{{options.showChip}}"></switch>
+<view class="flex flex-wrap" wx:for="{{items}}" wx:for-item="item">
+  <view>{{item.name}} {{itemdata.lack}} 数量 来源 需要 已有</view>
+  <view>
+    <view class="material-source" wx:for="{{item.source}}" wx:for-item="source">
+      {{source.key}}
+      <view>{{source.value}}</view>
+    </view>
+  </view>
+</view>

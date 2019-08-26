@@ -34,7 +34,6 @@
   "exclude": [
     "node_modules",
     "miniprogram_dist",
-    "**/*.spec.ts",
-    "./miniprogram/model"
+    "**/*.spec.ts"
   ]
 }

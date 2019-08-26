@@ -18,12 +18,12 @@
     <view class="{{PageCur=='change'?'text-green':'text-gray'}}">线索交换</view>
   </view>
 
-  <!-- <view class="action" bindtap="NavChange" data-cur="levelCalc">
+  <view class="action" bindtap="NavChange" data-cur="levelCalc">
     <view class='cuIcon-cu-image'>
      <text class=" lg {{PageCur=='levelCalc'?'text-green cuIcon-newsfill':'text-gray cuIcon-news'}}"></text>
     </view>
-    <view class="{{PageCur=='levelCalc'?'text-green':'text-gray'}}">升级计算</view>
-  </view> -->
+    <view class="{{PageCur=='levelCalc'?'text-green':'text-gray'}}">材料规划</view>
+  </view>
 
   <view class="action" bindtap="NavChange" data-cur="about">
     <view class='cuIcon-cu-image'>
